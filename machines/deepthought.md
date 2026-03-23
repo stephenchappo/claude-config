@@ -69,6 +69,12 @@ All uncensored: `dolphin-llama3` (8B), `dolphin-mistral` (7B), `llama2-uncensore
 
 - Worklog file: `/srv/wiki-content/worklog.md`
 - Worklog git repo: `/srv/wiki-content/`
+- Wiki API: `http://192.168.1.100:3000/graphql`
+- Wiki API token: env var `WIKI_TOKEN` (in `~/.claude/settings.json`)
+- Wiki worklog page ID: `6`
+- Wiki worklog page path: `worklog`
+- Asana project GID: `1213656559375019`
+- Asana tasks file: `/srv/wiki-content/asana-tasks.json`
 
 ## Pending Setup Tasks
 
