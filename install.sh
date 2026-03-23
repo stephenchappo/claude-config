@@ -5,15 +5,36 @@
 set -e
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOSTNAME="$(hostname)"
 
-echo "Installing Claude config from $REPO_DIR"
+echo "Installing Claude config from $REPO_DIR (hostname: $HOSTNAME)"
 
-# Root-level CLAUDE.md (requires sudo if /CLAUDE.md is owned by root)
-if [ -f /CLAUDE.md ]; then
-  echo "  /CLAUDE.md already exists — skipping (review manually)"
+# User-level CLAUDE.md → ~/.claude/CLAUDE.md (universal rules, loaded in every session)
+mkdir -p ~/.claude
+if [ -L ~/.claude/CLAUDE.md ]; then
+  echo "  ~/.claude/CLAUDE.md already symlinked — skipping"
+elif [ -f ~/.claude/CLAUDE.md ]; then
+  echo "  ~/.claude/CLAUDE.md exists as a regular file — review and remove manually, then re-run"
 else
-  sudo cp "$REPO_DIR/CLAUDE.md" /CLAUDE.md
-  echo "  Installed /CLAUDE.md"
+  ln -s "$REPO_DIR/CLAUDE.md" ~/.claude/CLAUDE.md
+  echo "  Linked ~/.claude/CLAUDE.md"
+fi
+
+# Machine-specific CLAUDE.md → ~/CLAUDE.md
+MACHINE_FILE="$REPO_DIR/machines/$HOSTNAME.md"
+if [ -f "$MACHINE_FILE" ]; then
+  if [ -L ~/CLAUDE.md ]; then
+    echo "  ~/CLAUDE.md already symlinked — skipping"
+  elif [ -f ~/CLAUDE.md ]; then
+    echo "  ~/CLAUDE.md exists as a regular file — review and remove manually, then re-run"
+  else
+    ln -s "$MACHINE_FILE" ~/CLAUDE.md
+    echo "  Linked ~/CLAUDE.md → machines/$HOSTNAME.md"
+  fi
+else
+  echo ""
+  echo "  WARNING: No machine file found at machines/$HOSTNAME.md"
+  echo "  Create it and re-run to get machine-specific context."
 fi
 
 # Skills
@@ -38,4 +59,4 @@ if [ ! -f ~/.claude/secrets.md ]; then
 fi
 
 echo ""
-echo "Done. Restart Claude Code to pick up skill changes."
+echo "Done. Restart Claude Code to pick up changes."
