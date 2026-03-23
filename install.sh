@@ -50,6 +50,31 @@ for skill_dir in "$REPO_DIR/skills"/*/; do
   fi
 done
 
+# Machine config JSON → ~/.claude/machine-config.json (used by VSCode dashboard extension)
+MACHINE_JSON="$REPO_DIR/machines/$HOSTNAME.json"
+if [ -f "$MACHINE_JSON" ]; then
+  cp "$MACHINE_JSON" ~/.claude/machine-config.json
+  echo "  Wrote ~/.claude/machine-config.json"
+else
+  echo "  No machines/$HOSTNAME.json found — dashboard will use defaults"
+fi
+
+# VSCode dashboard extension
+EXTENSION_SRC="$REPO_DIR/vscode-extension"
+if [ -d "$EXTENSION_SRC" ]; then
+  # Install into both .vscode and .vscode-server (local and remote)
+  for vscode_dir in "$HOME/.vscode" "$HOME/.vscode-server"; do
+    EXTENSION_DEST="$vscode_dir/extensions/homelab-welcome"
+    if [ -d "$vscode_dir" ]; then
+      rm -rf "$EXTENSION_DEST"
+      cp -r "$EXTENSION_SRC" "$EXTENSION_DEST"
+      echo "  Installed VSCode extension → $EXTENSION_DEST"
+    fi
+  done
+else
+  echo "  No vscode-extension/ directory found — skipping"
+fi
+
 # Secrets file reminder
 if [ ! -f ~/.claude/secrets.md ]; then
   echo ""

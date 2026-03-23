@@ -1,0 +1,21 @@
+{
+  "name": "homelab-welcome",
+  "displayName": "Homelab Welcome",
+  "description": "Custom welcome page showing worklog, open tasks, services and skills for the homelab.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "homelab-welcome.show",
+        "title": "Show Homelab Dashboard"
+      }
+    ]
+  },
+  "devDependencies": {}
+}

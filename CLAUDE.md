@@ -63,6 +63,10 @@ When told "we're done for the day" or similar, use the `wrap-up` skill:
 - Prefer `docker compose down` over `docker rm -f`.
 - Never touch NAS data files without explicit instruction.
 
+## Identity
+
+Each machine has a name defined in its `~/CLAUDE.md` under `## Identity`. Use that name when referring to yourself or when the user addresses you by the machine name. Refer to other machines by their names, not by IP.
+
 ## Communication
 
 - Keep responses concise — lead with action or answer, not explanation.
