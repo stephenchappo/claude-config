@@ -18,7 +18,7 @@ All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
 
 ## Session Start
 
-1. `git pull` in all relevant repos (listed in machine-specific `~/CLAUDE.md`).
+1. `git pull` in all relevant repos (listed in machine-specific `~/CLAUDE.md`). For each repo, check if it was already up to date or if new commits came down — if anything was pulled, tell the user what changed before proceeding.
 2. Read the worklog (location in `~/CLAUDE.md`) — last 3 entries minimum.
 3. Check Asana for open or in-progress tasks.
 4. If context is unclear, ask before making assumptions.
