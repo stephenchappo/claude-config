@@ -3,6 +3,10 @@
 This file provides guidance to Claude Code (claude.ai/code) when working in this environment.
 Machine-specific context is in `~/CLAUDE.md` on each machine.
 
+## Plans
+
+All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
+
 ## Git — Always Keep Repos Up To Date
 
 **This is mandatory, no exceptions.**
