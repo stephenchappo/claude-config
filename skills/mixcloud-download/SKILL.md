@@ -35,35 +35,33 @@ mv "<Title>.mp3" "/marvin/Music & Audio/DJ Mixes/<Title>.mp3"
 
 Delete the original `.m4a` after confirming the MP3 is in place.
 
-## 4. Check metadata
+## 4. Set metadata
 
-```bash
-ffprobe -v quiet -print_format json -show_format "/marvin/Music & Audio/DJ Mixes/<Title>.mp3"
-```
+Read the existing tags with ffprobe, then rewrite them to match this structure — inferring values
+from the Mixcloud page title, URL, and uploader where possible:
 
-Show the user the current tags and ask them to confirm or edit. Key tags to check:
-- `title` — the mix name
-- `artist` — the DJ/artist name
-- `album_artist` — should match `artist`
-- `album` — event or series name (optional)
-- `date` — year
+| Tag | Value | Source |
+|-----|-------|--------|
+| `title` | The mix name only (e.g. "Sparky's Magic Piano Mix") | Right-hand part of the page title, after the event name |
+| `album` | The event or series name (e.g. "Forget the Restival") | Left-hand part of the page title, or event context |
+| `artist` | The DJ's real name or stage name | Mixcloud uploader name or page metadata |
+| `album_artist` | Same as `artist` — always | Must match `artist` exactly |
+| `date` | Year of the mix | Mixcloud upload date or event year |
 
-## 5. Fix metadata if needed
-
-If the user wants changes, use ffmpeg to rewrite tags without re-encoding:
+Use ffmpeg to write all tags without re-encoding:
 
 ```bash
 ffmpeg -i "<input.mp3>" -codec:a copy \
-  -metadata title="..." \
-  -metadata artist="..." \
-  -metadata album_artist="..." \
-  -metadata album="..." \
-  -metadata date="..." \
+  -metadata title="<mix name>" \
+  -metadata album="<event/series name>" \
+  -metadata artist="<DJ name>" \
+  -metadata album_artist="<DJ name>" \
+  -metadata date="<year>" \
   "<input.tmp.mp3>"
 mv "<input.tmp.mp3>" "<input.mp3>"
 ```
 
-Always ensure `artist` and `album_artist` are set and match each other.
+Show the user the proposed tags before writing and ask for confirmation or corrections.
 
 ## 6. Confirm
 
