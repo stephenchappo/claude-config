@@ -65,6 +65,11 @@ All uncensored: `dolphin-llama3` (8B), `dolphin-mistral` (7B), `llama2-uncensore
 - **Do NOT format or modify the external SSD** (`nvme1n1p2`) — it contains personal data (Photos/, Becky/, Becky.zip). Explicit confirmation required for any partition changes.
 - Secure Boot is disabled in BIOS to allow nvidia-dkms-580 to load — do not re-enable it.
 
+## Wrap-Up Config
+
+- Worklog file: `/srv/wiki-content/worklog.md`
+- Worklog git repo: `/srv/wiki-content/`
+
 ## Pending Setup Tasks
 
 See `AI_SERVER_STATE.md` To Do section for the authoritative current list. As of last update:
