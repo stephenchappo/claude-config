@@ -11,8 +11,10 @@ trillian is the primary homelab server running Docker services, with Cloudflare 
 
 Repos to `git pull` at session start:
 - `/srv/docker/`
+- `/srv/wiki-content/`
 
 Read last 3 entries in the worklog at http://192.168.1.100:3000/worklog for recent context.
+Worklog file: `/srv/wiki-content/worklog.md`
 
 ## Key References
 
@@ -25,6 +27,11 @@ Read last 3 entries in the worklog at http://192.168.1.100:3000/worklog for rece
 | Worklog | http://192.168.1.100:3000/worklog |
 | Wiki API | http://192.168.1.100:3000/graphql |
 | Wiki API Token | see `~/.claude/secrets.md` |
+
+## Additional References
+
+- **Docker services reference**: `/srv/docker/CLAUDE.md` — read this when working with Docker services (20 services documented with ports, networks, volume mounts, gotchas).
+- **Asana project GID**: `1213656559375019` (used by the `wrap-up` skill).
 
 ## Critical Constraints
 
