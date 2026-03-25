@@ -49,7 +49,6 @@ Read last 3 entries in `/srv/wiki-content/worklog.md` for recent context.
 |---------|------|-------|
 | Ollama | :11434 | GPU-accelerated, systemd service |
 | Open WebUI | :3000 | Docker, connects to Ollama |
-| ComfyUI | :8188 | `/home/scon/ComfyUI`, systemd service, CUDA |
 | Whisper ASR | :9000 | Docker, `medium` model, GPU, OpenAI-compatible API |
 | Navidrome | :4533 | Docker, `/srv/docker/deepthought/navidrome/`; mounts `/marvin/Music & Audio/Music` → `/music` and `/marvin/Music & Audio/DJ Mixes` → `/dj-mixes` (both `:ro`) |
 | n8n | :5678 | Docker, `/srv/docker/deepthought/n8n/`, SQLite |
