@@ -12,8 +12,11 @@ function loadMachineConfig() {
 }
 
 const MACHINE = loadMachineConfig();
-const WORKLOG_PATH = MACHINE.worklog_path || '/srv/wiki-content/worklog.md';
-const ASANA_TASKS_PATH = MACHINE.asana_tasks_path || '/srv/wiki-content/asana-tasks.json';
+function expandTilde(p) {
+  return p && p.startsWith('~/') ? os.homedir() + p.slice(1) : (p || '');
+}
+const WORKLOG_PATH = expandTilde(MACHINE.worklog_path) || '/srv/wiki-content/worklog.md';
+const ASANA_TASKS_PATH = expandTilde(MACHINE.asana_tasks_path) || '/srv/wiki-content/asana-tasks.json';
 
 const SERVICES = [
   { name: 'Jellyseerr',  url: 'https://requests.fake-dom.com', desc: 'Media requests' },

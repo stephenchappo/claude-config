@@ -83,5 +83,13 @@ if [ ! -f ~/.claude/secrets.md ]; then
   echo "  See secrets.md.example for the expected format."
 fi
 
+# wiki-content repo reminder
+if [ ! -d "$HOME/wiki-content" ]; then
+  echo ""
+  echo "  ACTION REQUIRED: ~/wiki-content not found."
+  echo "  Clone it with:"
+  echo "    git clone https://github.com/stephenchappo/wiki-content.git ~/wiki-content"
+fi
+
 echo ""
 echo "Done. Restart Claude Code to pick up changes."

@@ -1,0 +1,7 @@
+{
+  "machine_name": "arthur",
+  "subtitle": "arthur · dispatch agent | Trillian · 192.168.1.100 | Deepthought · 192.168.1.151",
+  "worklog_path": "~/wiki-content/worklog.md",
+  "worklog_url": "http://192.168.1.100:3000/worklog",
+  "asana_tasks_path": "~/wiki-content/asana-tasks.json"
+}
