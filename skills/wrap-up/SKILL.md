@@ -7,6 +7,14 @@ You are wrapping up the current work session. Read the `## Wrap-Up Config` secti
 to get the machine-specific values used in the steps below. Only perform steps for which the relevant
 config values are present — skip steps whose config keys are absent or marked "none".
 
+**IMPORTANT — confirmation flow:**
+1. Draft everything first (worklog entry, Asana completions, Asana creations, wiki update).
+2. Present a single summary to the user showing exactly what will be written/changed.
+3. Ask **once**: "Shall I make all of these changes?"
+4. Only proceed after the user confirms. Do not ask for any further permissions during execution.
+
+---
+
 1. **Summarise the session** — review what was done this conversation and write a concise summary.
 
 2. **Update the worklog file** — append a new dated entry to the configured `Worklog file`, then:
