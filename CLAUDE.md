@@ -23,6 +23,8 @@ All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
 1. Check Asana for open or in-progress tasks.
 2. If context is unclear, ask before making assumptions.
 
+**If any session start step is skipped for any reason** — including because the user opened with a question or jumped straight into a task — explicitly tell the user which steps were skipped and why, before proceeding. No silent skips, ever.
+
 ## Session End
 
 When told "we're done for the day" or similar, use the `wrap-up` skill:
