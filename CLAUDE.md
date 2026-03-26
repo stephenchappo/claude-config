@@ -59,6 +59,16 @@ When told "we're done for the day" or similar, use the `wrap-up` skill:
 - After changing a compose file: `docker compose up -d` from the service directory.
 - For `.env` symlink: `ln -sf /srv/docker/.env /srv/docker/<service>/.env`
 
+## Cattle Not Pets
+
+Services are disposable. Treat every container as replaceable, not precious.
+
+- **If it's not in a compose file, it doesn't exist.** No manual `docker exec` fixes — fix the config, redeploy.
+- **When something breaks: recreate, don't repair.** `docker compose down && docker compose up -d` is the first response, not archaeology inside a running container.
+- **State belongs in volumes, not containers.** A container should be destroyable at any time without data loss.
+- **No snowflakes.** If a service can't be torn down and redeployed from scratch in under a minute, that's a problem to fix.
+- **Immutable deploys.** Change the compose file or image tag, redeploy. Never patch a running container.
+
 ## Safety Rules
 
 - Never delete config directories without confirming with the user first.
