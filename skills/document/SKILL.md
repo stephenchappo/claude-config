@@ -67,4 +67,7 @@ git commit -m "links: add <title>"
 git push
 ```
 
-Confirm to the user: **"Saved and pushed. Available on all machines after their next git pull."**
+Confirm to the user with:
+- A success message: "Saved and pushed."
+- The direct URL that was just saved (as a clickable link)
+- Where to browse the full library: `http://192.168.1.100:3000/en/links` (wiki) or `/srv/wiki-content/links.md` on any machine after `git pull`
