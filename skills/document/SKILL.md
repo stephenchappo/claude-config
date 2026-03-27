@@ -67,6 +67,12 @@ git commit -m "links: add <title>"
 git push
 ```
 
+## Step 5 — Tell Trillian to pull
+
+```bash
+ssh trillian 'cd /srv/wiki-content && git pull'
+```
+
 Confirm to the user with:
 - A success message: "Saved and pushed."
 - The direct URL that was just saved (as a clickable link)
