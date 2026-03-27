@@ -38,6 +38,7 @@ When told "we're done for the day" or similar, use the `wrap-up` skill:
 - Mark tasks complete immediately when finished — don't batch completions.
 - Add meaningful notes to completed tasks (what was done, key paths, decisions).
 - If new work is discovered mid-session, create an Asana task for it before continuing.
+- **Every task must be assigned to Scon and added to the trillian2 project** (GID: 1213656559375019), no exceptions. Use the "New Features" section (GID: 1213578293643100) for new work. Never leave a task unassigned or outside this project.
 
 ## Wiki
 
