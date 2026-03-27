@@ -26,15 +26,16 @@ Use WebFetch to retrieve the page and extract:
 Present your findings and ask for confirmation before saving:
 
 ```
-Title:    <title>
-URL:      <url>
-Category: <category>
-Summary:  <one sentence>
+Title:       <title>
+URL:         <url>
+Category:    <category>
+Description: <2-3 sentence description of what this is and why it's useful>
+Tags:        <tag1>, <tag2>, <tag3>  (lowercase, hyphenated, e.g. docker, self-hosted, api, python)
 
 Save this? (or suggest corrections)
 ```
 
-Wait for the user to confirm or correct the title, category, or summary.
+Wait for the user to confirm or correct any field.
 
 ## Step 3 — Append to links file
 
@@ -51,9 +52,9 @@ Append the new entry under a `## <Category>` heading (create the heading if it d
 
 ```markdown
 ### [<Title>](<URL>)
-*Added: YYYY-MM-DD*
+*Added: YYYY-MM-DD · Tags: `<tag1>` `<tag2>` `<tag3>`*
 
-<Summary>
+<Description>
 
 ```
 
