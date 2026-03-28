@@ -1,4 +1,4 @@
-# install.ps1 — deploy Claude config files on Windows
+# install.ps1 - deploy Claude config files on Windows
 # Run once after cloning this repo, or re-run to update.
 # Requires Developer Mode OR run as Administrator for symlinks.
 # If neither is available, files will be copied instead.
@@ -11,7 +11,7 @@ $Hostname = (hostname).ToLower()
 
 Write-Host "Installing Claude config from $RepoDir (hostname: $Hostname)"
 
-# Find machine file — case-insensitive match against machines/ directory
+# Find machine file - case-insensitive match against machines/ directory
 $MachineFile = Get-ChildItem "$RepoDir\machines\*.md" |
     Where-Object { $_.BaseName.ToLower() -eq $Hostname } |
     Select-Object -First 1
@@ -29,7 +29,7 @@ function Link-Or-Copy {
     )
 
     if (Test-Path $Link) {
-        Write-Host "  $Label already exists — skipping"
+        Write-Host "  $Label already exists - skipping"
         return
     }
 
@@ -37,9 +37,9 @@ function Link-Or-Copy {
         New-Item -ItemType SymbolicLink -Path $Link -Target $Target -Force | Out-Null
         Write-Host "  Linked $Label"
     } catch {
-        # Symlinks failed (no Developer Mode / not admin) — fall back to copy
+        # Symlinks failed (no Developer Mode / not admin) - fall back to copy
         Copy-Item -Path $Target -Destination $Link -Force
-        Write-Host "  Copied $Label (symlinks unavailable — re-run install.ps1 after repo updates)"
+        Write-Host "  Copied $Label (symlinks unavailable - re-run install.ps1 after repo updates)"
     }
 }
 
@@ -52,7 +52,7 @@ function Link-Or-Copy-Dir {
     )
 
     if (Test-Path $Link) {
-        Write-Host "  $Label already exists — skipping"
+        Write-Host "  $Label already exists - skipping"
         return
     }
 
@@ -72,21 +72,21 @@ function Link-Or-Copy-Dir {
     }
 }
 
-# ~/.claude/CLAUDE.md — universal rules
+# ~/.claude/CLAUDE.md - universal rules
 $ClaudeDir = "$env:USERPROFILE\.claude"
 New-Item -ItemType Directory -Path $ClaudeDir -Force | Out-Null
 Link-Or-Copy -Target "$RepoDir\CLAUDE.md" -Link "$ClaudeDir\CLAUDE.md" -Label "~\.claude\CLAUDE.md"
 
-# ~/CLAUDE.md — machine-specific context
+# ~/CLAUDE.md - machine-specific context
 if ($MachineFile) {
-    Link-Or-Copy -Target $MachineFile.FullName -Link "$env:USERPROFILE\CLAUDE.md" -Label "~\CLAUDE.md → machines\$($MachineFile.Name)"
+    Link-Or-Copy -Target $MachineFile.FullName -Link "$env:USERPROFILE\CLAUDE.md" -Label "~\CLAUDE.md -> machines\$($MachineFile.Name)"
 } else {
     Write-Host ""
     Write-Host "  WARNING: No machine file found matching machines\$Hostname.md"
     Write-Host "  Create machines\$Hostname.md and re-run."
 }
 
-# Skills — link each skill directory
+# Skills - link each skill directory
 $SkillsDir = "$ClaudeDir\skills"
 New-Item -ItemType Directory -Path $SkillsDir -Force | Out-Null
 Get-ChildItem "$RepoDir\skills" -Directory | ForEach-Object {
@@ -94,12 +94,12 @@ Get-ChildItem "$RepoDir\skills" -Directory | ForEach-Object {
     Link-Or-Copy-Dir -Target $_.FullName -Link "$SkillsDir\$SkillName" -Label "~\.claude\skills\$SkillName"
 }
 
-# Machine config JSON → ~/.claude/machine-config.json
+# Machine config JSON -> ~/.claude/machine-config.json
 if ($MachineJson) {
     Copy-Item -Path $MachineJson.FullName -Destination "$ClaudeDir\machine-config.json" -Force
     Write-Host "  Wrote ~\.claude\machine-config.json"
 } else {
-    Write-Host "  No machines\$Hostname.json found — dashboard will use defaults"
+    Write-Host "  No machines\$Hostname.json found - dashboard will use defaults"
 }
 
 # Secrets reminder

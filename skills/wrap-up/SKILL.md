@@ -25,6 +25,15 @@ config values are present — skip steps whose config keys are absent or marked 
    - `## YYYY-MM-DD — Title`
    - What was worked on and completed
    - Decisions made and why
+   - **Troubleshooting notes**: Any errors hit, gotchas, workarounds, or non-obvious fixes encountered
+     during the session. Capture explicitly — feature flags needed, encoding issues, service restarts,
+     unexpected behaviour. Format as:
+     ```
+     ### Troubleshooting Notes
+     - **Issue**: [what went wrong or was unexpected]
+       **Fix**: [what resolved it]
+       **Why**: [root cause if known]
+     ```
    - Outstanding items / blockers (table with Priority and Task columns)
 
 3. **Update the live Wiki.js worklog page** *(skip if `Wiki API` not configured)* —
@@ -43,15 +52,21 @@ config values are present — skip steps whose config keys are absent or marked 
    # Strip frontmatter before passing content
    ```
 
-4. **Mark Asana tasks complete** *(skip if `Asana project GID` not configured)* —
+4. **Update wiki service/feature pages** *(skip if `Wiki API` not configured)* —
+   For every service or feature worked on this session, create or update its wiki page under
+   `/services/*` or `/operations/*`. Each page must include a **Troubleshooting** section capturing
+   any gotchas, non-obvious setup steps, known issues, and their fixes from this session.
+   This is mandatory — do not skip even if the fix seemed minor.
+
+5. **Mark Asana tasks complete** *(skip if `Asana project GID` not configured)* —
    For any tasks fully completed this session, mark them done in Asana with a summary note.
 
-5. **Create Asana tasks for outstanding items** *(skip if `Asana project GID` not configured)* —
+6. **Create Asana tasks for outstanding items** *(skip if `Asana project GID` not configured)* —
    Every row in the Outstanding table MUST have a matching Asana task. Use the **exact worklog task
    text** as the Asana task name (verbatim). If an existing task covers the same work but has a
    different name, update the worklog text to match the Asana name instead.
 
-6. **Regenerate Asana tasks file** *(skip if `Asana tasks file` not configured)* —
+7. **Regenerate Asana tasks file** *(skip if `Asana tasks file` not configured)* —
    Fetch all incomplete tasks from the configured Asana project GID and write to `Asana tasks file`:
    ```json
    {
@@ -63,4 +78,4 @@ config values are present — skip steps whose config keys are absent or marked 
    ```
    Then: `cd <Worklog git repo> && git add <Asana tasks file> && git commit -m "update asana-tasks.json" && git push`
 
-7. **Confirm** — report back with what was logged, which Asana tasks were completed, and which were created.
+8. **Confirm** — report back with what was logged, which Asana tasks were completed, and which were created.
