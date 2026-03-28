@@ -80,6 +80,26 @@ Services are disposable. Treat every container as replaceable, not precious.
 - **No snowflakes.** If a service can't be torn down and redeployed from scratch in under a minute, that's a problem to fix.
 - **Immutable deploys.** Change the compose file or image tag, redeploy. Never patch a running container.
 
+## Error Handling — Stop and Create Context on Any Error
+
+**On any error, stop immediately and create a handoff file. No exceptions. This applies in bypassPermissions mode too.**
+
+Errors include: tool failures, SSH command failures, API errors, permission denied, connection timeouts, unexpected output, or any other failure condition.
+
+**When you encounter an error:**
+
+1. **Stop immediately.** Do not retry the same action. Do not try an alternative approach. Do not continue past the error.
+2. **Write a context file** to `~/.claude/error-context/YYYY-MM-DD-HH-MM-SS-context.md` (on Windows: `C:\Users\steph\.claude\error-context\`):
+   - **Task**: The overall goal being worked on
+   - **Progress**: Everything completed successfully before the error
+   - **Error**: Exact error message, what tool/command failed, what the input was
+   - **Next steps**: What would need to happen next once the error is resolved
+   - **Key paths**: Files modified, services affected, relevant config locations
+   - **How to resume**: Step-by-step instructions for a fresh Claude instance with no prior context
+3. **Tell the user** what failed, the exact path to the context file, and that they can spin up a new Claude instance to investigate.
+
+The context file must be self-contained — a fresh Claude instance with no conversation history should be able to read it and know exactly what happened and what to do next.
+
 ## Safety Rules
 
 - Never delete config directories without confirming with the user first.
