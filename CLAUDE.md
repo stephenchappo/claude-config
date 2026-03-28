@@ -7,6 +7,14 @@ Machine-specific context is in `~/CLAUDE.md` on each machine.
 
 All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
 
+When a plan is **created**, immediately add a row to the wiki Plans Registry (http://192.168.1.100:3000/en/claude/plans, page ID 29) with status **⏳ Pending**.
+
+When a plan is **approved** by the user (they say "go ahead", "do it", or similar), update its status to **✅ Approved** before executing.
+
+When a plan is **completed**, update its status to **✅ Completed**.
+
+Use the Wiki.js GraphQL API to update the page. The Wiki API token is in `~/.claude/settings.json` as `WIKI_TOKEN`.
+
 ## Git — Always Keep Repos Up To Date
 
 **This is mandatory, no exceptions.**
