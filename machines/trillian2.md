@@ -36,6 +36,8 @@ Worklog file: `/srv/wiki-content/worklog.md`
 | Worklog | http://192.168.1.100:3000/worklog |
 | Wiki API | http://192.168.1.100:3000/graphql |
 | Wiki API Token | see `~/.claude/secrets.md` |
+| HA API | http://192.168.1.150:8123 |
+| HA Tokens | see `~/.claude/secrets.md` (Trillian Claude + Prometheus) |
 
 ## Additional References
 
