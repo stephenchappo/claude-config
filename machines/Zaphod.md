@@ -14,33 +14,34 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 ## Context
 
 Zaphod is a Windows workstation. It has SSH access to Trillian and Deepthought for remote work.
-Wiki and Asana are the sources of truth for tasks and documentation.
+Wiki (Outline) and Asana are the sources of truth for tasks and documentation.
+Obsidian vault (personal PKM): `D:\Documents\Obsidian Vault` — GitHub: `stephenchappo/obsidian-vault`
 
 ## Session Start Additions
 
 Repos to `git pull` at session start:
 - `~/claude-config/` (or wherever it's cloned on this machine)
+- `D:\Documents\Obsidian Vault` (Obsidian vault)
 
-Read last 3 entries in the worklog at http://192.168.1.100:3000/worklog for recent context.
+Read last 3 entries in the worklog at http://192.168.1.100:3002 (Outline) for recent context.
 
 ## Key References
 
 | Resource | Location |
 |----------|----------|
 | Asana project | https://app.asana.com/1/1207033739051298/project/1213656559375019 |
-| Wiki | http://192.168.1.100:3000 |
+| Wiki (Outline) | http://192.168.1.100:3002 |
+| Wiki API (Outline RPC) | http://192.168.1.100:3002/api/ |
 | Trillian (primary server) | ssh scon@192.168.1.100 |
 | Deepthought (AI/GPU box) | ssh scon@192.168.1.151 |
-| Worklog | http://192.168.1.100:3000/worklog |
-| Wiki API | http://192.168.1.100:3000/graphql |
+| Obsidian vault | D:\Documents\Obsidian Vault |
+| Obsidian GitHub | https://github.com/stephenchappo/obsidian-vault |
 
 ## Wrap-Up Config
 
 - Worklog git repo: `~/claude-config/` (no local worklog file — updates go via Trillian)
-- Wiki API: `http://192.168.1.100:3000/graphql`
-- Wiki API token: env var `WIKI_TOKEN` (in `~/.claude/settings.json`)
-- Wiki worklog page ID: `6`
-- Wiki worklog page path: `worklog`
+- Wiki (Outline) API: `http://192.168.1.100:3002/api/`
+- Wiki API token: env var `OUTLINE_TOKEN` (in `~/.claude/settings.json`)
 - Asana project GID: `1213656559375019`
 
 ## SSH Access

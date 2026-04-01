@@ -7,13 +7,19 @@ Machine-specific context is in `~/CLAUDE.md` on each machine.
 
 All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
 
-When a plan is **created**, immediately add a row to the wiki Plans Registry (http://192.168.1.100:3000/en/claude/plans, page ID 29) with status **⏳ Pending**.
+**Where to save plans:**
+- **Zaphod**: `D:\Documents\Obsidian Vault\30-Projects\Plans\YYYY-MM-DD - Title.md`
+- **Trillian / Deepthought**: `~/obsidian-vault/30-Projects/Plans/YYYY-MM-DD - Title.md`
 
-When a plan is **approved** by the user (they say "go ahead", "do it", or similar), update its status to **✅ Approved** before executing.
+Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `git commit -m "plan: <title>"`, `git push`.
 
-When a plan is **completed**, update its status to **✅ Completed**.
+**Plans Registry:** Add a row to the Outline Plans Registry document (http://192.168.1.100:3002) with status ⏳ Pending when created, ✅ Approved when approved, ✅ Completed when done. Use the Outline RPC API (`http://192.168.1.100:3002/api/`) with token `OUTLINE_TOKEN` from `~/.claude/settings.json`.
 
-Use the Wiki.js GraphQL API to update the page. The Wiki API token is in `~/.claude/settings.json` as `WIKI_TOKEN`.
+**At the start of every plan execution (before any other work):**
+1. Create one parent Asana ticket `[PLAN] <name>` containing the full verification checklist.
+2. Create one child Asana ticket per phase with detailed step-by-step instructions.
+3. All tickets: assigned to Scon, trillian2 project (GID: 1213656559375019), New Features section (GID: 1213578293643100).
+4. Update the plan file's Asana Tickets table with the resulting URLs before touching anything else.
 
 ## Git — Always Keep Repos Up To Date
 
@@ -52,23 +58,22 @@ When told "we're done for the day" or similar, use the `wrap-up` skill:
 
 - **Every completed task gets a wiki page** (or an update to an existing one).
 - Done means: task complete + documented.
-- Use the GraphQL API to create/update pages programmatically.
+- **Wiki platform**: Outline at `http://192.168.1.100:3002`. Use the Outline RPC API for programmatic access. Token: `OUTLINE_TOKEN` in `~/.claude/settings.json`.
 - Use Mermaid diagrams for architecture and pipelines wherever helpful.
-- Standard page structure:
-  - `/home` — overview, network diagram, services table
-  - `/infrastructure/*` — servers, networking, storage, tunnels
-  - `/services/*` — individual Docker services
-  - `/operations/*` — runbooks, how-tos
-  - `/worklog` — running session log
+- Standard collection/page structure:
+  - `Home` collection — overview, network diagram, services table
+  - `Infrastructure` collection — servers, networking, storage, tunnels
+  - `Services` collection — individual Docker services
+  - `Operations` collection — runbooks, how-tos, worklog
 
 ## Docker & Services
 
-- All compose files: `/srv/docker/<service>/docker-compose.yml`
-- Global env vars: `/srv/docker/.env`
+- All compose files on Trillian: `/srv/docker/trillian/<service>/docker-compose.yml`
+- Global env vars: `/srv/docker/trillian/.env`
 - Services needing Cloudflare tunnel access must join the `tunnel-net` external network.
 - Never publish ports for tunnel-only services.
 - After changing a compose file: `docker compose up -d` from the service directory.
-- For `.env` symlink: `ln -sf /srv/docker/.env /srv/docker/<service>/.env`
+- Service `.env` files use `env_file: - ../.env - .env` to inherit global env then override with service-specific vars.
 
 ## Cattle Not Pets
 
