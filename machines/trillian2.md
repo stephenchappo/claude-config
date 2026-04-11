@@ -20,22 +20,23 @@ trillian2 is the primary homelab server running Docker services, with Cloudflare
 
 Repos to `git pull` at session start:
 - `/srv/docker/`
-- `/srv/wiki-content/`
+- `/home/scon/knowledge-graph/`
 
-Read last 3 entries in the worklog at http://192.168.1.100:3000/worklog for recent context.
-Worklog file: `/srv/wiki-content/worklog.md`
+Read last 3 entries in the worklog from Outline (wiki is now at http://192.168.1.100:3002, not 3000 — WikiJS is down).
+Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
 
 ## Key References
 
 | Resource | Location |
 |----------|----------|
 | Asana project | https://app.asana.com/1/1207033739051298/project/1213656559375019 |
-| Wiki | http://192.168.1.100:3000 |
+| Wiki (Outline) | http://192.168.1.100:3002 |
+| Wiki API | http://192.168.1.100:3002/api/ |
+| Wiki API Token | `OUTLINE_TOKEN` in `~/.claude/settings.json` |
 | Docker configs | `/srv/docker/` |
 | Global env | `/srv/docker/.env` |
-| Worklog | http://192.168.1.100:3000/worklog |
-| Wiki API | http://192.168.1.100:3000/graphql |
-| Wiki API Token | see `~/.claude/secrets.md` |
+| Worklog | Outline doc `e9defef7-6a5d-4607-b270-cd90a6ed2347` |
+| Knowledge graph | `~/knowledge-graph/` → github.com/stephenchappo/knowledge-graph |
 | HA API | http://192.168.1.150:8123 |
 | HA Tokens | see `~/.claude/secrets.md` (Trillian Claude + Prometheus) |
 
@@ -45,14 +46,11 @@ Worklog file: `/srv/wiki-content/worklog.md`
 
 ## Wrap-Up Config
 
-- Worklog file: `/srv/wiki-content/worklog.md`
-- Worklog git repo: `/srv/wiki-content/`
-- Wiki API: `http://192.168.1.100:3000/graphql`
-- Wiki API token: env var `WIKI_TOKEN` (in `~/.claude/settings.json`)
-- Wiki worklog page ID: `6`
-- Wiki worklog page path: `worklog`
+- Wiki: Outline at `http://192.168.1.100:3002` (WikiJS at port 3000 is down)
+- Wiki API: `http://192.168.1.100:3002/api/`
+- Wiki API token: `OUTLINE_TOKEN` in `~/.claude/settings.json`
+- Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
 - Asana project GID: `1213656559375019`
-- Asana tasks file: `/srv/wiki-content/asana-tasks.json`
 
 ## Critical Constraints
 
