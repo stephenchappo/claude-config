@@ -22,9 +22,6 @@ Repos to `git pull` at session start:
 - `/srv/docker/`
 - `/home/scon/knowledge-graph/`
 
-Read last 3 entries in the worklog from Outline (wiki is now at http://192.168.1.100:3002, not 3000 — WikiJS is down).
-Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
-
 ## Key References
 
 | Resource | Location |
@@ -46,7 +43,7 @@ Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
 
 ## Wrap-Up Config
 
-- Wiki: Outline at `http://192.168.1.100:3002` (WikiJS at port 3000 is down)
+- Wiki: Outline at `http://192.168.1.100:3002` 
 - Wiki API: `http://192.168.1.100:3002/api/`
 - Wiki API token: `OUTLINE_TOKEN` in `~/.claude/settings.json`
 - Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
