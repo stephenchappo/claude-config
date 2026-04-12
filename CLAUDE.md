@@ -9,7 +9,7 @@ All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
 
 **Where to save plans:**
 - **Zaphod**: `D:\Documents\Obsidian Vault\30-Projects\Plans\YYYY-MM-DD - Title.md`
-- **Trillian / Deepthought**: `~/obsidian-vault/30-Projects/Plans/YYYY-MM-DD - Title.md`
+- **Trillian / Deepthought**: `~/projects/obsidian-vault/30-Projects/Plans/YYYY-MM-DD - Title.md`
 
 Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `git commit -m "plan: <title>"`, `git push`.
 

@@ -20,7 +20,7 @@ trillian2 is the primary homelab server running Docker services, with Cloudflare
 
 Repos to `git pull` at session start:
 - `/srv/docker/`
-- `/home/scon/knowledge-graph/`
+- `/home/scon/projects/knowledge-graph/`
 
 ## Key References
 
@@ -33,7 +33,7 @@ Repos to `git pull` at session start:
 | Docker configs | `/srv/docker/` |
 | Global env | `/srv/docker/.env` |
 | Worklog | Outline doc `e9defef7-6a5d-4607-b270-cd90a6ed2347` |
-| Knowledge graph | `~/knowledge-graph/` → github.com/stephenchappo/knowledge-graph |
+| Knowledge graph | `~/projects/knowledge-graph/` → github.com/stephenchappo/knowledge-graph |
 | HA API | http://192.168.1.150:8123 |
 | HA Tokens | see `~/.claude/secrets.md` (Trillian Claude + Prometheus) |
 
