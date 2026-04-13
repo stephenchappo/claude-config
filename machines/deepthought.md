@@ -17,17 +17,16 @@ deepthought is a Dell G7 laptop running Ubuntu 22.04 as a local AI inference + h
 ## Session Start Additions
 
 Repos to `git pull` at session start:
-- `/srv/wiki-content/`
-- `/srv/docker/deepthought/`
-- `~/claude-config/`
-
-Read last 3 entries in `/srv/wiki-content/worklog.md` for recent context.
+- `/srv/docker/`
+- `~/projects/_project-meta/claude-config/`
+- `~/projects/obsidian-vault/`
+- `~/projects/knowledge-graph/`
 
 ## Key Files
 
 - **`/home/scon/AI_SERVER_STATE.md`** — Primary state document. Tracks To Do items, hardware specs, storage layout, network config, and software status. The To Do section **must always remain at the very top**, immediately after the header — never move it.
 - **`/home/scon/ai-server-setup.sh`** — Setup script covering NVIDIA drivers, LVM expansion, zram, and ethernet.
-- **`/srv/wiki-content/worklog.md`** — Running log of work sessions.
+- **`/srv/outline-wiki/`** — Outline wiki content git repo.
 - **`/srv/docker/deepthought/`** — Docker Compose service definitions for this machine.
 
 ## System Overview
@@ -73,14 +72,11 @@ All uncensored: `dolphin-llama3` (8B), `dolphin-mistral` (7B), `llama2-uncensore
 
 ## Wrap-Up Config
 
-- Worklog file: `/srv/wiki-content/worklog.md`
-- Worklog git repo: `/srv/wiki-content/`
-- Wiki API: `http://192.168.1.100:3000/graphql`
-- Wiki API token: env var `WIKI_TOKEN` (in `~/.claude/settings.json`)
-- Wiki worklog page ID: `6`
-- Wiki worklog page path: `worklog`
+- Wiki: Outline at `http://192.168.1.100:3002`
+- Wiki API: `http://192.168.1.100:3002/api/`
+- Wiki API token: env var `OUTLINE_TOKEN` (in `~/.claude/settings.json`)
+- Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
 - Asana project GID: `1213656559375019`
-- Asana tasks file: `/srv/wiki-content/asana-tasks.json`
 
 ## Pending Setup Tasks
 
