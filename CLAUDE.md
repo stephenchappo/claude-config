@@ -10,8 +10,8 @@ All plan files must be named using the format: `Category - Title.md`
 Categories: `AI`, `Claude`, `Docker`, `Hive`, `Homelab`, `Karakeep`, `n8n`, `Wiki` — or a relevant service/project name. Always use hostnames (e.g. `Deepthought`, `Trillian`), never hardware names (e.g. not "Dell G7"). Use version suffixes `(v0)`, `(v1)` etc. when multiple iterations exist, so they sort correctly.
 
 **Where to save plans:**
-- **Zaphod**: `D:\Documents\Obsidian Vault\30-Projects\Plans\Category - Title.md`
-- **Trillian / Deepthought**: `~/obsidian-vault/30-Projects/Plans/Category - Title.md`
+- **Zaphod**: `~/projects/obsidian-vault/30-Projects/Plans/Category - Title.md`
+- **Trillian / Deepthought**: `~/projects/obsidian-vault/30-Projects/Plans/Category - Title.md`
 
 Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `git commit -m "plan: <title>"`, `git push`.
 
@@ -23,7 +23,7 @@ Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `gi
 - `Completed/` — done
 - `Unsorted/` — staging area
 
-**Plans Registry:** Add a row to the Outline Plans Registry document (http://192.168.1.100:3002) with status ⏳ Pending when created, ✅ Approved when approved, ✅ Completed when done. Use the Outline RPC API (`http://192.168.1.100:3002/api/`) with token `OUTLINE_TOKEN` from `~/.claude/settings.json`.
+**Plans Registry:** Add a row to `~/projects/obsidian-vault/70-Homelab/Operations/Plans Registry.md` with status ⏳ Pending when created, ✅ Approved when approved, ✅ Completed when done. Then `git add`, `git commit`, `git push` the vault.
 
 ## Git — Always Keep Repos Up To Date
 
@@ -52,13 +52,15 @@ When told "we're done for the day" or similar, use the `wrap-up` skill:
 
 - **Every completed task gets a wiki page** (or an update to an existing one).
 - Done means: task complete + documented.
-- **Wiki platform**: Outline at `http://192.168.1.100:3002`. Use the Outline RPC API for programmatic access. Token: `OUTLINE_TOKEN` in `~/.claude/settings.json`.
+- **Wiki platform**: Obsidian vault at `~/projects/obsidian-vault/` (Trillian/Deepthought) or `~/projects/obsidian-vault/` (Zaphod). Edit files directly; commit and push via git.
 - Use Mermaid diagrams for architecture and pipelines wherever helpful.
-- Standard collection/page structure:
-  - `Home` collection — overview, network diagram, services table
-  - `Infrastructure` collection — servers, networking, storage, tunnels
-  - `Services` collection — individual Docker services
-  - `Operations` collection — runbooks, how-tos, worklog
+- Standard folder structure under `70-Homelab/`:
+  - `Servers/` — per-machine docs (Trillian, Deepthought, Marvin, Zaphod)
+  - `Infrastructure.md` — MOC / index with live Dataview table
+  - `Networking/` — topology, devices, Cloudflare, Pi-hole, OpenVPN
+  - `Storage/` — layout, rclone
+  - `Services/` — individual Docker service docs
+  - `Operations/` — runbooks, worklog, architecture overview
 
 ## Docker & Services
 
@@ -116,7 +118,7 @@ Each machine has a name defined in its `~/CLAUDE.md` under `## Identity`. Use th
 - Keep responses concise — lead with action or answer, not explanation.
 - When something unexpected is found, flag it to the user.
 - If a task is more complex than expected, say so before diving in.
-- Document decisions and rationale in both worklog and the relevant wiki page.
+- Document decisions and rationale in both the Obsidian worklog and the relevant wiki note.
 
 ## Emails
 

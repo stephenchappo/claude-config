@@ -14,7 +14,7 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 
 ## Context
 
-trillian2 is the primary homelab server running Docker services, with Cloudflare tunnel access for external services. Wiki and Asana are the sources of truth for tasks and documentation.
+trillian2 is the primary homelab server running Docker services, with Cloudflare tunnel access for external services. Obsidian vault and Asana are the sources of truth for tasks and documentation.
 
 ## Session Start Additions
 
@@ -27,12 +27,10 @@ Repos to `git pull` at session start:
 | Resource | Location |
 |----------|----------|
 | Asana project | https://app.asana.com/1/1207033739051298/project/1213656559375019 |
-| Wiki (Outline) | http://localhost:3002 |
-| Wiki API | http://localhost:3002/api/ |
-| Wiki API Token | `OUTLINE_TOKEN` in `~/.claude/settings.json` |
+| Obsidian vault | `~/projects/obsidian-vault/` |
+| Worklog | `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md` |
 | Docker configs | `/srv/docker/` |
 | Global env | `/srv/docker/.env` |
-| Worklog | Outline doc `e9defef7-6a5d-4607-b270-cd90a6ed2347` |
 | Knowledge graph | `~/projects/knowledge-graph/` → github.com/stephenchappo/knowledge-graph |
 | HA API | http://192.168.42.149:8123 |
 | HA Tokens | see `~/.claude/secrets.md` (Trillian Claude + Prometheus) |
@@ -45,10 +43,8 @@ Repos to `git pull` at session start:
 
 ## Wrap-Up Config
 
-- Wiki: Outline at `http://localhost:3002`
-- Wiki API: `http://localhost:3002/api/`
-- Wiki API token: `OUTLINE_TOKEN` in `~/.claude/settings.json`
-- Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
+- Worklog file: `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md`
+- Worklog git repo: `~/projects/obsidian-vault/`
 - Asana project GID: `1213656559375019`
 
 ## Critical Constraints

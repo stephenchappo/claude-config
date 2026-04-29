@@ -26,7 +26,7 @@ Repos to `git pull` at session start:
 
 - **`/home/scon/AI_SERVER_STATE.md`** — Primary state document. Tracks To Do items, hardware specs, storage layout, network config, and software status. The To Do section **must always remain at the very top**, immediately after the header — never move it.
 - **`/home/scon/ai-server-setup.sh`** — Setup script covering NVIDIA drivers, LVM expansion, zram, and ethernet.
-- **`/srv/outline-wiki/`** — Outline wiki content git repo.
+- **`~/projects/obsidian-vault/`** — Obsidian vault (wiki, worklog, plans).
 - **`/srv/docker/deepthought/`** — Docker Compose service definitions for this machine.
 
 ## System Overview
@@ -72,10 +72,8 @@ All uncensored: `dolphin-llama3` (8B), `dolphin-mistral` (7B), `llama2-uncensore
 
 ## Wrap-Up Config
 
-- Wiki: Outline at `http://192.168.1.100:3002`
-- Wiki API: `http://192.168.1.100:3002/api/`
-- Wiki API token: env var `OUTLINE_TOKEN` (in `~/.claude/settings.json`)
-- Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
+- Worklog file: `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md`
+- Worklog git repo: `~/projects/obsidian-vault/`
 - Asana project GID: `1213656559375019`
 
 ## Pending Setup Tasks
