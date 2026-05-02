@@ -27,7 +27,7 @@ Repos to `git pull` at session start:
 - **`/home/scon/AI_SERVER_STATE.md`** — Primary state document. Tracks To Do items, hardware specs, storage layout, network config, and software status. The To Do section **must always remain at the very top**, immediately after the header — never move it.
 - **`/home/scon/ai-server-setup.sh`** — Setup script covering NVIDIA drivers, LVM expansion, zram, and ethernet.
 - **`/srv/outline-wiki/`** — Outline wiki content git repo.
-- **`/srv/docker/deepthought/`** — Docker Compose service definitions for this machine.
+- **`/srv/docker/deepthought/`** — Docker Compose service definitions for this machine. All services live here — no exceptions.
 
 ## System Overview
 
@@ -45,24 +45,34 @@ Repos to `git pull` at session start:
 
 ## Running Services
 
-| Service | Port | Notes |
-|---------|------|-------|
-| Ollama | :11434 | GPU-accelerated, systemd service |
-| Open WebUI | :3000 | Docker, connects to Ollama |
-| Whisper ASR | :9000 | Docker, `medium` model, GPU, OpenAI-compatible API |
-| Navidrome | :4533 | Docker, `/srv/docker/deepthought/navidrome/`; mounts `/marvin/Music & Audio/Music` → `/music` and `/marvin/Music & Audio/DJ Mixes` → `/dj-mixes` (both `:ro`) |
-| n8n | :5678 | Docker, `/srv/docker/deepthought/n8n/`, SQLite |
+All services are defined in `/srv/docker/deepthought/` and tracked in git.
+
+| Service | Port | Compose path |
+|---------|------|--------------|
+| Ollama | :11434 | systemd (not Docker) |
+| Open WebUI | :3000 | `/srv/docker/deepthought/open-webui/` |
+| SearXNG | (internal) | `/srv/docker/deepthought/open-webui/` (same stack) |
+| Whisper ASR | :9000 | `/srv/docker/deepthought/whisper/` |
+| TTS | :8000 | `/srv/docker/deepthought/tts/` |
+| Hive | :8090 | `/srv/docker/deepthought/hive/` |
+| n8n | :5678 | `/srv/docker/deepthought/n8n/` |
+| Navidrome | :4533 | `/srv/docker/deepthought/navidrome/` |
+| Snapcast + MPD + myMPD | :1704/:8080 | `/srv/docker/deepthought/snapcast/` |
+| JobSpy | :8088 | `/srv/docker/deepthought/jobspy/` |
+| Glances | :61208 | `/srv/docker/deepthought/glances/` |
+| Docker socket proxy | :2375 | `/srv/docker/deepthought/socket-proxy/` |
 
 ### Ollama Models
 
 All uncensored: `dolphin-llama3` (8B), `dolphin-mistral` (7B), `llama2-uncensored` (7B), `wizard-vicuna-uncensored` (7B).
+Larger models: `igorls/gemma-4-E4B-it-heretic-GGUF:q4_k_m`, `juilpark/gemma-4-31B-it-uncensored-heretic:q4_k_m`.
 
 ## NAS — marvin
 
 `/marvin` is a Synology NAS (192.168.1.101) mounted via NFS at boot. Relevant subdirectories:
 
-- `/marvin/Music & Audio/Music` — primary music library (Navidrome `/music`)
-- `/marvin/Music & Audio/DJ Mixes` — DJ mix files (Navidrome `/dj-mixes`)
+- `/marvin/Music & Audio/Music` — primary music library
+- `/marvin/Music & Audio/DJ Mixes` — DJ mix files
 
 ## Critical Constraints
 
@@ -105,7 +115,7 @@ zramctl
 cat /proc/swaps
 
 # Manage Docker services
-cd /srv/docker/deepthought/n8n && docker compose up -d
+cd /srv/docker/deepthought/<service> && docker compose up -d
 docker compose ps
 
 # Run setup script
