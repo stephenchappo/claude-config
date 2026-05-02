@@ -5,21 +5,25 @@ Machine-specific context is in `~/CLAUDE.md` on each machine.
 
 ## Plans
 
-All plan files must be named using the format: `YYYY-MM-DD - Plan Title.md`
+All plan files must be named using the format: `Category - Title.md`
+
+Categories: `AI`, `Claude`, `Docker`, `Hive`, `Homelab`, `Karakeep`, `n8n`, `Wiki` — or a relevant service/project name. Always use hostnames (e.g. `Deepthought`, `Trillian`), never hardware names (e.g. not "Dell G7"). Use version suffixes `(v0)`, `(v1)` etc. when multiple iterations exist, so they sort correctly.
 
 **Where to save plans:**
-- **Zaphod**: `~/projects/obsidian-vault/30-Projects/Plans/YYYY-MM-DD - Title.md`
-- **Trillian / Deepthought**: `~/projects/obsidian-vault/30-Projects/Plans/YYYY-MM-DD - Title.md`
+- **Zaphod**: `~/projects/obsidian-vault/30-Projects/Plans/Category - Title.md`
+- **Trillian / Deepthought**: `~/projects/obsidian-vault/30-Projects/Plans/Category - Title.md`
 
 Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `git commit -m "plan: <title>"`, `git push`.
 
-**Plans Registry:** Add a row to the Outline Plans Registry document (http://192.168.1.100:3002) with status ⏳ Pending when created, ✅ Approved when approved, ✅ Completed when done. Use the Outline RPC API (`http://192.168.1.100:3002/api/`) with token `OUTLINE_TOKEN` from `~/.claude/settings.json`.
+**When creating a plan**, ask the user: "Should this go in **Active** (starting soon / in progress) or **Backburner** (good idea, not right now)?" Save to the appropriate subfolder rather than the root.
 
-**At the start of every plan execution (before any other work):**
-1. Create one parent Asana ticket `[PLAN] <name>` containing the full verification checklist.
-2. Create one child Asana ticket per phase with detailed step-by-step instructions.
-3. All tickets: assigned to Scon, trillian2 project (GID: 1213656559375019), New Features section (GID: 1213578293643100).
-4. Update the plan file's Asana Tickets table with the resulting URLs before touching anything else.
+**Plan folder structure** (`30-Projects/Plans/`):
+- `Active/` — in progress or starting soon
+- `Backburner/` — parked ideas
+- `Completed/` — done
+- `Unsorted/` — staging area
+
+**Plans Registry:** Add a row to `~/projects/obsidian-vault/70-Homelab/Operations/Plans Registry.md` with status ⏳ Pending when created, ✅ Approved when approved, ✅ Completed when done. Then `git add`, `git commit`, `git push` the vault.
 
 ## Git — Always Keep Repos Up To Date
 
@@ -34,8 +38,7 @@ Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `gi
 
 `git pull` for all relevant repos is automated via a SessionStart hook — results are injected into context automatically. Review the pull results and tell the user if anything changed.
 
-1. Check Asana for open or in-progress tasks.
-2. If context is unclear, ask before making assumptions.
+1. If context is unclear, ask before making assumptions.
 
 **If any session start step is skipped for any reason** — including because the user opened with a question or jumped straight into a task — explicitly tell the user which steps were skipped and why, before proceeding. No silent skips, ever.
 
@@ -43,28 +46,21 @@ Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `gi
 
 When told "we're done for the day" or similar, use the `wrap-up` skill:
 1. Add a dated entry to the worklog summarising what was done.
-2. Mark completed Asana tasks as done.
-3. Note any outstanding items or blockers.
-
-## Asana
-
-- **Before starting any work**, check if a relevant Asana task exists. If not, create one first.
-- Mark tasks complete immediately when finished — don't batch completions.
-- Add meaningful notes to completed tasks (what was done, key paths, decisions).
-- If new work is discovered mid-session, create an Asana task for it before continuing.
-- **Every task must be assigned to Scon and added to the trillian2 project** (GID: 1213656559375019), no exceptions. Use the "New Features" section (GID: 1213578293643100) for new work. Never leave a task unassigned or outside this project.
+2. Note any outstanding items or blockers.
 
 ## Wiki
 
 - **Every completed task gets a wiki page** (or an update to an existing one).
 - Done means: task complete + documented.
-- **Wiki platform**: Outline at `http://192.168.1.100:3002`. Use the Outline RPC API for programmatic access. Token: `OUTLINE_TOKEN` in `~/.claude/settings.json`.
+- **Wiki platform**: Obsidian vault at `~/projects/obsidian-vault/` (Trillian/Deepthought) or `~/projects/obsidian-vault/` (Zaphod). Edit files directly; commit and push via git.
 - Use Mermaid diagrams for architecture and pipelines wherever helpful.
-- Standard collection/page structure:
-  - `Home` collection — overview, network diagram, services table
-  - `Infrastructure` collection — servers, networking, storage, tunnels
-  - `Services` collection — individual Docker services
-  - `Operations` collection — runbooks, how-tos, worklog
+- Standard folder structure under `70-Homelab/`:
+  - `Servers/` — per-machine docs (Trillian, Deepthought, Marvin, Zaphod)
+  - `Infrastructure.md` — MOC / index with live Dataview table
+  - `Networking/` — topology, devices, Cloudflare, Pi-hole, OpenVPN
+  - `Storage/` — layout, rclone
+  - `Services/` — individual Docker service docs
+  - `Operations/` — runbooks, worklog, architecture overview
 
 ## Docker & Services
 
@@ -120,9 +116,9 @@ Each machine has a name defined in its `~/CLAUDE.md` under `## Identity`. Use th
 ## Communication
 
 - Keep responses concise — lead with action or answer, not explanation.
-- When something unexpected is found, flag it and create an Asana task.
+- When something unexpected is found, flag it to the user.
 - If a task is more complex than expected, say so before diving in.
-- Document decisions and rationale in both worklog and the relevant wiki page.
+- Document decisions and rationale in both the Obsidian worklog and the relevant wiki note.
 
 ## Emails
 

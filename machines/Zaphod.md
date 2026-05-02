@@ -14,7 +14,7 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 ## Context
 
 Zaphod is a Windows workstation. It has SSH access to Trillian and Deepthought for remote work.
-Wiki (Outline) and Asana are the sources of truth for tasks and documentation.
+Obsidian vault and Asana are the sources of truth for tasks and documentation.
 Obsidian vault (personal PKM): `~/projects/obsidian-vault` — GitHub: `stephenchappo/obsidian-vault`
 
 ## Session Start Additions
@@ -24,29 +24,26 @@ Repos to `git pull` at session start (PowerShell paths):
 - `~/projects/obsidian-vault/`
 - `~/projects/knowledge-graph/`
 
-Read last 3 entries in the worklog at http://192.168.1.100:3002 (Outline) for recent context.
-Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
+Read the last 3 entries in `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md` for recent context.
 
 ## Key References
 
 | Resource | Location |
 |----------|----------|
 | Asana project | https://app.asana.com/1/1207033739051298/project/1213656559375019 |
-| Wiki (Outline) | http://192.168.1.100:3002 |
-| Wiki API (Outline RPC) | http://192.168.1.100:3002/api/ |
+| Obsidian vault | `~/projects/obsidian-vault/` |
+| Worklog | `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md` |
 | Trillian (primary server) | ssh scon@192.168.1.100 |
 | Deepthought (AI/GPU box) | ssh scon@192.168.1.151 |
 | Projects repo | `~/projects/` |
-| Obsidian vault | `~/projects/obsidian-vault/` |
 | Claude config | `~/projects/_project-meta/claude-config/` |
 | Scripts | `~/projects/_project-meta/scripts/` |
 | Secrets | `~/projects/_project-meta/secrets/` |
 
 ## Wrap-Up Config
 
-- Wiki (Outline) API: `http://192.168.1.100:3002/api/`
-- Wiki API token: env var `OUTLINE_TOKEN` (in `~/.claude/settings.json`)
-- Worklog Outline doc ID: `e9defef7-6a5d-4607-b270-cd90a6ed2347`
+- Worklog file: `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md`
+- Worklog git repo: `~/projects/obsidian-vault/`
 - Asana project GID: `1213656559375019`
 
 ## SSH Access
