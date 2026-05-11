@@ -47,6 +47,7 @@ Before saving a plan: `git pull` in the vault repo. After saving: `git add`, `gi
 When told "we're done for the day" or similar, use the `wrap-up` skill:
 1. Add a dated entry to the worklog summarising what was done.
 2. Note any outstanding items or blockers.
+3. Update Vikunja: mark completed tasks done, update priorities or due dates if anything changed, create any new tasks that surfaced during the session.
 
 ## Wiki
 

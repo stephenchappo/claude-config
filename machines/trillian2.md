@@ -14,7 +14,7 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 
 ## Context
 
-trillian2 is the primary homelab server running Docker services, with Cloudflare tunnel access for external services. Obsidian vault and Asana are the sources of truth for tasks and documentation.
+trillian2 is the primary homelab server running Docker services, with Cloudflare tunnel access for external services. Obsidian vault is the source of truth for documentation; Vikunja (self-hosted at `http://trillian2:3456`, MCP configured) is the source of truth for tasks.
 
 ## Session Start Additions
 
@@ -26,7 +26,7 @@ Repos to `git pull` at session start:
 
 | Resource | Location |
 |----------|----------|
-| Asana project | https://app.asana.com/1/1207033739051298/project/1213656559375019 |
+| Vikunja | `http://trillian2:3456` — task manager (MCP: `vikunja` server, user scope) |
 | Obsidian vault | `~/projects/obsidian-vault/` |
 | Worklog | `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md` |
 | Docker configs | `/srv/docker/` |
@@ -45,7 +45,7 @@ Repos to `git pull` at session start:
 
 - Worklog file: `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md`
 - Worklog git repo: `~/projects/obsidian-vault/`
-- Asana project GID: `1213656559375019`
+- Vikunja: update relevant tasks (mark done, adjust priorities) as part of wrap-up
 
 ## Critical Constraints
 
