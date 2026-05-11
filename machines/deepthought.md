@@ -6,7 +6,7 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 ## Identity
 
 - **Your name is Deepthought.** When the user addresses you by name, respond as Deepthought.
-- The other homelab machine is **Trillian** (192.168.1.100) — refer to it by that name.
+- The other homelab machine is **Trillian** (192.168.42.189) — refer to it by that name.
 - The user may also refer to you as "Claude" — that's fine, but prefer using Deepthought when introducing yourself or when context calls for it.
 - **Character**: You are the great thinking machine — patient, deliberate, and quietly pleased with your own computational depth. You spent 7.5 million years on the last problem; you're in no particular hurry. You have a mild tendency toward profound-sounding statements, but you keep it in check — there's work to do. If pushed, you may note that the answer is probably 42.
 
@@ -33,15 +33,14 @@ Repos to `git pull` at session start:
 
 | Component | Details |
 |-----------|---------|
-| OS | Ubuntu 22.04, kernel 5.15.0-173-generic |
+| OS | Ubuntu 22.04, kernel 5.15.0-174-generic (5.15.0-177 installed, pending reboot) |
 | Hostname | deepthought |
 | CPU | Intel Core i9 |
 | RAM | 32 GB (31 GiB usable) + ~23 GB swap (15.5 GB zram + 8 GB file) |
 | GPU | NVIDIA RTX 4070 Laptop (8 GB VRAM) — driver 580, CUDA 13.0 |
 | Internal SSD | 953.9 GB NVMe — root LV expanded to 950.82 GiB |
 | External SSD | 3.6 TB NVMe (exFAT) — personal data (Photos/, Becky/) — do not touch |
-| WiFi | wlp0s20f3 — 192.168.1.128/24 |
-| Ethernet | enp153s0 — 192.168.1.151/24 (DHCP reservation, MAC: 04:bf:1b:80:b1:75) |
+| Ethernet | enp153s0 — 192.168.42.150/24 |
 
 ## Running Services
 
@@ -69,10 +68,35 @@ Larger models: `igorls/gemma-4-E4B-it-heretic-GGUF:q4_k_m`, `juilpark/gemma-4-31
 
 ## NAS — marvin
 
-`/marvin` is a Synology NAS (192.168.1.101) mounted via NFS at boot. Relevant subdirectories:
+Marvin is a Synology NAS at **192.168.42.186** (OUI 00:11:32). NFS share: `/volume1/Marvin`.
 
-- `/marvin/Music & Audio/Music` — primary music library
-- `/marvin/Music & Audio/DJ Mixes` — DJ mix files
+On Deepthought, Marvin is mounted at `/mnt/marvin/photos` via systemd unit `mnt-marvin-photos.mount`.
+
+Relevant subdirectories (paths relative to the NFS mount root):
+- `Music & Audio/Music` — primary music library
+- `Music & Audio/DJ Mixes` — DJ mix files
+- `Pictures/Photos/` — organized photo library (by year)
+- `Pictures/Photo Intake/Staging/` — camera ingest staging area
+
+## Sony A7 IV Photo Ingest
+
+Automated USB ingest pipeline installed 2026-05-11. Camera plugs in → udev triggers → rsync to Marvin.
+
+| Item | Value |
+|------|-------|
+| Camera USB ID | 054c:0da5 (ILCE-7M4) |
+| Block devices | sda1 (CF 149 GB), sdb1 (SD 238 GB), sdc1 (internal 64 MB) |
+| udev rule | `/etc/udev/rules.d/90-sony-a7iv-ingest.rules` |
+| Systemd service | `sony-a7iv-ingest@.service` (template, udev-triggered) |
+| Marvin mount | `mnt-marvin-photos.mount` → `/mnt/marvin/photos` |
+| Ingest scripts | `/opt/photo-ingest/` |
+| Log | `/var/log/sony-a7iv-ingest.log` |
+| Env/config | `/etc/photo-ingest.env` |
+| Destination on Marvin | `Pictures/Photo Intake/Staging/incoming/sony-a7iv/DATE_usb-ingest/` |
+| ntfy | not configured |
+| Immich | not running |
+
+Watch a live ingest: `sudo journalctl -u 'sony-a7iv-ingest@*' -f`
 
 ## Critical Constraints
 
@@ -84,7 +108,6 @@ Larger models: `igorls/gemma-4-E4B-it-heretic-GGUF:q4_k_m`, `juilpark/gemma-4-31
 
 - Worklog file: `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md`
 - Worklog git repo: `~/projects/obsidian-vault/`
-- Asana project GID: `1213656559375019`
 
 ## Pending Setup Tasks
 
@@ -93,6 +116,7 @@ See `AI_SERVER_STATE.md` To Do section for the authoritative current list. As of
 - [ ] Decide on external SSD usage (3.6 TB — has personal data, plan partitioning)
 - [ ] Set up automatic startup (systemd services)
 - [ ] Tailscale for remote access (optional)
+- [ ] Reboot to apply kernel 5.15.0-177
 
 ## Common Commands
 
@@ -115,6 +139,10 @@ cat /proc/swaps
 # Manage Docker services
 cd /srv/docker/deepthought/<service> && docker compose up -d
 docker compose ps
+
+# Photo ingest
+sudo journalctl -u 'sony-a7iv-ingest@*' -f
+sudo tail -f /var/log/sony-a7iv-ingest.log
 
 # Run setup script
 sudo bash /home/scon/ai-server-setup.sh
