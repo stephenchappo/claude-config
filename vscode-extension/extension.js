@@ -16,7 +16,7 @@ function expandTilde(p) {
   return p && p.startsWith('~/') ? os.homedir() + p.slice(1) : (p || '');
 }
 const WORKLOG_PATH = expandTilde(MACHINE.worklog_path) || '/srv/wiki-content/worklog.md';
-const ASANA_TASKS_PATH = expandTilde(MACHINE.asana_tasks_path) || '/srv/wiki-content/asana-tasks.json';
+const TASKS_PATH = expandTilde(MACHINE.vikunja_tasks_path) || '/srv/wiki-content/vikunja-tasks.json';
 
 const SERVICES = [
   { name: 'Jellyseerr',  url: 'https://requests.fake-dom.com', desc: 'Media requests' },
@@ -31,33 +31,33 @@ const SERVICES = [
 
 
 const CLAUDE_SKILLS = [
-  { name: '/wrap-up',       desc: 'Update worklog, complete Asana tasks, note outstanding items', file: '/home/scon/.claude/skills/wrap-up/SKILL.md' },
+  { name: '/wrap-up',       desc: 'Update worklog, complete Vikunja tasks, note outstanding items', file: '/home/scon/.claude/skills/wrap-up/SKILL.md' },
   { name: '/update-config', desc: 'Configure Claude Code settings, hooks, permissions, env vars' },
   { name: '/simplify',      desc: 'Review changed code for reuse, quality, and efficiency' },
   { name: '/loop',          desc: 'Run a prompt or command on a recurring interval' },
   { name: '/claude-api',    desc: 'Build apps with the Claude API / Anthropic SDK' },
 ];
 
-function loadAsanaTasks() {
+function loadTasks() {
   try {
-    const data = JSON.parse(fs.readFileSync(ASANA_TASKS_PATH, 'utf8'));
+    const data = JSON.parse(fs.readFileSync(TASKS_PATH, 'utf8'));
     return data.tasks || [];
   } catch (_) {
     return [];
   }
 }
 
-function findAsanaUrl(taskText, asanaTasks) {
+function findTaskUrl(taskText, tasksIndex) {
   const normalize = s => s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
   const needle = normalize(taskText);
 
   // 1. Exact match
-  for (const t of asanaTasks) {
+  for (const t of tasksIndex) {
     if (normalize(t.name) === needle) return t.url;
   }
 
   // 2. One contains the other
-  for (const t of asanaTasks) {
+  for (const t of tasksIndex) {
     const name = normalize(t.name);
     if (name.includes(needle) || needle.includes(name)) return t.url;
   }
@@ -66,7 +66,7 @@ function findAsanaUrl(taskText, asanaTasks) {
   const words = needle.split(' ').filter(w => w.length > 3);
   if (!words.length) return null;
   let best = null, bestScore = 0;
-  for (const t of asanaTasks) {
+  for (const t of tasksIndex) {
     const name = normalize(t.name);
     const matches = words.filter(w => name.includes(w)).length;
     const score = matches / words.length;
@@ -134,10 +134,10 @@ function priorityColor(p) {
   return '#a3a3a3';
 }
 
-function buildHtml(session, asanaTasks) {
+function buildHtml(session, tasksIndex) {
   const tasksHtml = session && session.tasks.length
     ? session.tasks.map(t => {
-        const url = findAsanaUrl(t.task, asanaTasks);
+        const url = findTaskUrl(t.task, tasksIndex);
         const taskContent = url
           ? `<a href="${url}" class="task-link">${escHtml(t.task)}</a>`
           : `<span class="task-text">${escHtml(t.task)}</span>`;
@@ -431,7 +431,7 @@ function showWelcomePanel() {
   );
 
   function refresh() {
-    panel.webview.html = buildHtml(parseWorklog(), loadAsanaTasks());
+    panel.webview.html = buildHtml(parseWorklog(), loadTasks());
   }
 
   panel.webview.onDidReceiveMessage(msg => {

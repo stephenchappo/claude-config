@@ -3,5 +3,5 @@
   "subtitle": "deepthought · 192.168.1.151 | Marvin NAS · 192.168.1.101 | Powered by Claude",
   "worklog_path": "/srv/wiki-content/worklog.md",
   "worklog_url": "http://192.168.1.100:3000/worklog",
-  "asana_tasks_path": "/srv/wiki-content/asana-tasks.json"
+  "vikunja_tasks_path": "/srv/wiki-content/vikunja-tasks.json"
 }

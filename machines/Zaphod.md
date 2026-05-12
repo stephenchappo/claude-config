@@ -14,7 +14,7 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 ## Context
 
 Zaphod is a Windows workstation. It has SSH access to Trillian and Deepthought for remote work.
-Obsidian vault and Asana are the sources of truth for tasks and documentation.
+Obsidian vault and Vikunja are the sources of truth for tasks and documentation.
 Obsidian vault (personal PKM): `~/projects/obsidian-vault` — GitHub: `stephenchappo/obsidian-vault`
 
 ## Session Start Additions
@@ -30,7 +30,7 @@ Read the last 3 entries in `~/projects/obsidian-vault/70-Homelab/Operations/Work
 
 | Resource | Location |
 |----------|----------|
-| Asana project | https://app.asana.com/1/1207033739051298/project/1213656559375019 |
+| Vikunja | http://trillian:3456 |
 | Obsidian vault | `~/projects/obsidian-vault/` |
 | Worklog | `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md` |
 | Trillian (primary server) | ssh scon@192.168.1.100 |
@@ -44,7 +44,7 @@ Read the last 3 entries in `~/projects/obsidian-vault/70-Homelab/Operations/Work
 
 - Worklog file: `~/projects/obsidian-vault/70-Homelab/Operations/Worklog.md`
 - Worklog git repo: `~/projects/obsidian-vault/`
-- Asana project GID: `1213656559375019`
+- Vikunja is the task source of truth
 
 ## SSH Access
 

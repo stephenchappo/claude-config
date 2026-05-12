@@ -1,6 +1,6 @@
 ---
 name: wrap-up
-description: End-of-session wrap-up — update worklog, complete Asana tasks, note outstanding items
+description: End-of-session wrap-up — update worklog, complete Vikunja tasks, note outstanding items
 ---
 
 You are wrapping up the current work session. Read the `## Wrap-Up Config` section from `~/CLAUDE.md`
@@ -8,7 +8,7 @@ to get the machine-specific values used in the steps below. Only perform steps f
 config values are present — skip steps whose config keys are absent or marked "none".
 
 **IMPORTANT — confirmation flow:**
-1. Draft everything first (worklog entry, Asana completions, Asana creations, wiki update).
+1. Draft everything first (worklog entry, Vikunja completions, Vikunja creations, wiki update).
 2. Present a single summary to the user showing exactly what will be written/changed.
 3. Ask **once**: "Shall I make all of these changes?"
 4. Only proceed after the user confirms. Do not ask for any further permissions during execution.
@@ -64,24 +64,24 @@ config values are present — skip steps whose config keys are absent or marked 
     - If **approved/executed this session**: update the row's status to ✅ Completed or 🔄 In Progress as appropriate.
     Update the page via the Wiki.js GraphQL API using the `WIKI_TOKEN` env var.
 
-5. **Mark Asana tasks complete** *(skip if `Asana project GID` not configured)* —
-   For any tasks fully completed this session, mark them done in Asana with a summary note.
+5. **Mark Vikunja tasks complete** *(skip if `Vikunja project GID` not configured)* —
+   For any tasks fully completed this session, mark them done in Vikunja with a summary note.
 
-6. **Create Asana tasks for outstanding items** *(skip if `Asana project GID` not configured)* —
-   Every row in the Outstanding table MUST have a matching Asana task. Use the **exact worklog task
-   text** as the Asana task name (verbatim). If an existing task covers the same work but has a
-   different name, update the worklog text to match the Asana name instead.
+6. **Create Vikunja tasks for outstanding items** *(skip if `Vikunja project GID` not configured)* —
+   Every row in the Outstanding table MUST have a matching Vikunja task. Use the **exact worklog task
+   text** as the Vikunja task name (verbatim). If an existing task covers the same work but has a
+   different name, update the worklog text to match the Vikunja name instead.
 
-7. **Regenerate Asana tasks file** *(skip if `Asana tasks file` not configured)* —
-   Fetch all incomplete tasks from the configured Asana project GID and write to `Asana tasks file`:
+7. **Regenerate Vikunja tasks file** *(skip if `Vikunja tasks file` not configured)* —
+   Fetch all incomplete tasks from the configured Vikunja project GID and write to `Vikunja tasks file`:
    ```json
    {
      "project": "<project name>",
-     "project_url": "https://app.asana.com/...",
+     "project_url": "https://tasks.example.com/projects/<id>",
      "updated": "YYYY-MM-DD",
-     "tasks": [{ "name": "Task name", "url": "https://app.asana.com/..." }]
+     "tasks": [{ "name": "Task name", "url": "https://tasks.example.com/tasks/<id>" }]
    }
    ```
-   Then: `cd <Worklog git repo> && git add <Asana tasks file> && git commit -m "update asana-tasks.json" && git push`
+   Then: `cd <Worklog git repo> && git add <Vikunja tasks file> && git commit -m "update vikunja-tasks.json" && git push`
 
-8. **Confirm** — report back with what was logged, which Asana tasks were completed, and which were created.
+8. **Confirm** — report back with what was logged, which Vikunja tasks were completed, and which were created.

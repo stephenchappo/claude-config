@@ -124,6 +124,6 @@ add public hostname in Cloudflare Zero Trust → Tunnels → <tunnel> → Public
 | Wiki GraphQL API | http://192.168.1.100:3000/graphql |
 | Wiki API token | `WIKI_TOKEN` env var (in `~/.claude/settings.json` on each machine) |
 | Wiki worklog page | ID: 6, path: `worklog` |
-| Asana project | GID: `1213656559375019` |
+| Vikunja | Task source of truth |
 | GitHub | repos: `stephenchappo/claude-config`, `stephenchappo/wiki-content` |
 | Download client | qBittorrent on Ultraseedbox (`r0xyd0g.agate.usbx.me:443/qbittorrent`) |
