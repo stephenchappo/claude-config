@@ -1,0 +1,7 @@
+{
+    "claudeCode.preferredLocation": "panel",
+    "git.openRepositoryInParentFolders": "always",
+    "workbench.editor.enablePreview": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "claudeCode.allowDangerouslySkipPermissions": true
+}

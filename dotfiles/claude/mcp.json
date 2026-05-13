@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "inspector-jake": {
+      "command": "npx",
+      "args": ["-y", "inspector-jake-mcp"],
+      "transport": "stdio"
+    }
+  }
+}

@@ -102,6 +102,34 @@ if ($MachineJson) {
     Write-Host "  No machines\$Hostname.json found - dashboard will use defaults"
 }
 
+# VS Code settings -> %APPDATA%\Code\User\settings.json
+$VsCodeSettingsSrc = "$RepoDir\dotfiles\vscode\settings.json"
+if (Test-Path $VsCodeSettingsSrc) {
+    $VsCodeUserDir = "$env:APPDATA\Code\User"
+    New-Item -ItemType Directory -Path $VsCodeUserDir -Force | Out-Null
+    Link-Or-Copy -Target $VsCodeSettingsSrc -Link "$VsCodeUserDir\settings.json" -Label "%APPDATA%\Code\User\settings.json"
+}
+
+# SSH config -> ~/.ssh/config
+$SshConfigSrc = "$RepoDir\dotfiles\ssh\config"
+if (Test-Path $SshConfigSrc) {
+    $SshDir = "$env:USERPROFILE\.ssh"
+    New-Item -ItemType Directory -Path $SshDir -Force | Out-Null
+    Link-Or-Copy -Target $SshConfigSrc -Link "$SshDir\config" -Label "~\.ssh\config"
+}
+
+# Git config -> ~/.gitconfig
+$GitConfigSrc = "$RepoDir\dotfiles\git\gitconfig"
+if (Test-Path $GitConfigSrc) {
+    Link-Or-Copy -Target $GitConfigSrc -Link "$env:USERPROFILE\.gitconfig" -Label "~\.gitconfig"
+}
+
+# Claude MCP config -> ~/.claude/mcp.json
+$McpSrc = "$RepoDir\dotfiles\claude\mcp.json"
+if (Test-Path $McpSrc) {
+    Link-Or-Copy -Target $McpSrc -Link "$ClaudeDir\mcp.json" -Label "~\.claude\mcp.json"
+}
+
 # Secrets reminder
 if (-not (Test-Path "$ClaudeDir\secrets.md")) {
     Write-Host ""

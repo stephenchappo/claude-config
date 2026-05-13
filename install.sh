@@ -59,6 +59,67 @@ else
   echo "  No machines/$HOSTNAME.json found — dashboard will use defaults"
 fi
 
+# VS Code settings → ~/.config/Code/User/settings.json
+VSCODE_SETTINGS_SRC="$REPO_DIR/dotfiles/vscode/settings.json"
+if [ -f "$VSCODE_SETTINGS_SRC" ]; then
+  VSCODE_USER_DIR="$HOME/.config/Code/User"
+  mkdir -p "$VSCODE_USER_DIR"
+  TARGET="$VSCODE_USER_DIR/settings.json"
+  if [ -L "$TARGET" ]; then
+    echo "  $TARGET already symlinked — skipping"
+  elif [ -f "$TARGET" ]; then
+    echo "  $TARGET exists as a regular file — review and remove manually, then re-run"
+  else
+    ln -s "$VSCODE_SETTINGS_SRC" "$TARGET"
+    echo "  Linked $TARGET"
+  fi
+fi
+
+# SSH config → ~/.ssh/config
+SSH_CONFIG_SRC="$REPO_DIR/dotfiles/ssh/config"
+if [ -f "$SSH_CONFIG_SRC" ]; then
+  mkdir -p ~/.ssh && chmod 700 ~/.ssh
+  TARGET="$HOME/.ssh/config"
+  if [ -L "$TARGET" ]; then
+    echo "  ~/.ssh/config already symlinked — skipping"
+  elif [ -f "$TARGET" ]; then
+    echo "  ~/.ssh/config exists as a regular file — review and remove manually, then re-run"
+  else
+    ln -s "$SSH_CONFIG_SRC" "$TARGET"
+    chmod 600 "$SSH_CONFIG_SRC"
+    echo "  Linked ~/.ssh/config"
+  fi
+fi
+
+# Git config → ~/.gitconfig
+GITCONFIG_SRC="$REPO_DIR/dotfiles/git/gitconfig"
+if [ -f "$GITCONFIG_SRC" ]; then
+  TARGET="$HOME/.gitconfig"
+  if [ -L "$TARGET" ]; then
+    echo "  ~/.gitconfig already symlinked — skipping"
+  elif [ -f "$TARGET" ]; then
+    echo "  ~/.gitconfig exists as a regular file — review and remove manually, then re-run"
+  else
+    ln -s "$GITCONFIG_SRC" "$TARGET"
+    echo "  Linked ~/.gitconfig"
+  fi
+fi
+
+# Claude MCP config → ~/.claude/mcp.json
+MCP_SRC="$REPO_DIR/dotfiles/claude/mcp.json"
+if [ -f "$MCP_SRC" ]; then
+  mkdir -p ~/.claude
+  TARGET="$HOME/.claude/mcp.json"
+  if [ -L "$TARGET" ]; then
+    echo "  ~/.claude/mcp.json already symlinked — skipping"
+  elif [ -f "$TARGET" ]; then
+    echo "  ~/.claude/mcp.json exists as a regular file — review and remove manually, then re-run"
+  else
+    ln -s "$MCP_SRC" "$TARGET"
+    echo "  Linked ~/.claude/mcp.json"
+  fi
+fi
+
 # VSCode dashboard extension
 EXTENSION_SRC="$REPO_DIR/vscode-extension"
 if [ -d "$EXTENSION_SRC" ]; then

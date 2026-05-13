@@ -1,0 +1,24 @@
+Host trillian
+    HostName 192.168.42.189
+    User scon
+    IdentityFile ~/.ssh/id_ed25519
+
+Host deepthought
+    HostName 192.168.42.150
+    User scon
+    IdentityFile ~/.ssh/id_ed25519
+
+Host zaphod
+    HostName 192.168.42.219
+    User scon
+    IdentityFile ~/.ssh/id_ed25519
+
+Host marvin
+    HostName 192.168.42.186
+    User scon
+    IdentityFile ~/.ssh/id_ed25519
+
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
