@@ -22,14 +22,11 @@ The original monolithic Obsidian vault has been split into four separate vaults:
 | Personal (encrypted) | `~/projects/obsidian-personal-enc/` (ciphertext) | stephenchappo/obsidian-personal-enc (private) | Personal info, accounts, daily notes, brand — gocryptfs encrypted |
 
 The personal vault plaintext mounts at `~/projects/obsidian-personal/` (local only, never in git).
-Mount it with: `~/bin/mount-personal-vault.sh`
+Mount it with: `~/bin/mount-personal-vault.sh` (passwordless — passfile at `~/.config/gocryptfs/personal-vault.pass`)
 Unmount with: `fusermount -u ~/projects/obsidian-personal`
+Auto-sync: cron runs `~/bin/sync-personal-vault.sh` every 5 minutes to commit + push ciphertext.
 
-**Personal content not yet migrated** (pending `sudo apt install gocryptfs`):
-- `~/projects/obsidian-vault/40-Daily/`
-- `~/projects/obsidian-vault/50-Brand/`
-- `~/projects/obsidian-vault/20-Permanent/Personal Information/`
-- `~/projects/obsidian-vault/0 - Inbox/Personal Accounts & References.md`
+**The personal vault only exists on Anjie.** Daily notes, brand, personal info, and accounts live here and nowhere else. Other machines must not hold plaintext personal content.
 
 ## Key References
 
