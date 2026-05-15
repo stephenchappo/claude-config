@@ -47,6 +47,10 @@ Repos to `git pull` at session start:
 - Worklog git repo: `~/projects/obsidian-vault/`
 - Vikunja: update relevant tasks (mark done, adjust priorities) as part of wrap-up
 
+## Personal Vault
+
+The personal Obsidian vault (daily notes, brand, personal info, accounts) **only exists on Anjie** — gocryptfs-encrypted at `~/projects/obsidian-personal-enc/`, mounted at `~/projects/obsidian-personal/` when in use. If content needs to be added to the personal vault, it must go through Anjie. Do not store plaintext personal content on this machine.
+
 ## Critical Constraints
 
 - **Always ask before rebooting the machine.**
