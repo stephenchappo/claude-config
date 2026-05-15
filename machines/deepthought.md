@@ -98,6 +98,10 @@ Automated USB ingest pipeline installed 2026-05-11. Camera plugs in → udev tri
 
 Watch a live ingest: `sudo journalctl -u 'sony-a7iv-ingest@*' -f`
 
+## Personal Vault
+
+The personal Obsidian vault (daily notes, brand, personal info, accounts) **only exists on Anjie** — gocryptfs-encrypted at `~/projects/obsidian-personal-enc/`, mounted at `~/projects/obsidian-personal/` when in use. If content needs to be added to the personal vault, it must go through Anjie. Do not store plaintext personal content on this machine.
+
 ## Critical Constraints
 
 - **Always ask before rebooting the machine.**
