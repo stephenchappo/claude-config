@@ -6,7 +6,7 @@ description: Fetch recent SpankBang clips matching selected tag groups and post 
 Run exactly this bash command. Do not call any web APIs, do not fetch any URLs, do not search SpankBang yourself, do not use any web or fetch tools. The script handles everything.
 
 ```bash
-ssh -o StrictHostKeyChecking=no scon@host.docker.internal "python3 /home/scon/projects/stashdb/spankbang_discord.py --groups all --top 20"
+ssh -o StrictHostKeyChecking=no scon@host.docker.internal "python3 /home/scon/projects/stashdb/spankbang_discord.py --groups all --top 5"
 ```
 
 If the user specified groups (e.g. "religious", "bondage femdom", "kink"), substitute them into `--groups`. If they specified a top count, substitute into `--top`. Otherwise use the defaults above.
