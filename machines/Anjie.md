@@ -12,21 +12,28 @@ Universal rules are in `~/.claude/CLAUDE.md`.
 
 Anjie is a Lenovo ThinkPad X1 Carbon Gen 8 running Ubuntu 24.04 LTS. Used for personal productivity, Obsidian, and Claude Code.
 
-The original monolithic Obsidian vault has been split into four separate vaults:
+Four vault repos are unified into a single Obsidian instance via symlinks in `obsidian-vault/`:
 
-| Vault | Path | GitHub | Purpose |
-|-------|------|--------|---------|
-| Main | `~/projects/obsidian-vault/` | stephenchappo/obsidian-vault | General knowledge, hobbies, homelab, projects |
-| AI | `~/projects/obsidian-ai/` | stephenchappo/obsidian-ai (private) | Claude memory, benchmarks, pipelines, AI reference |
-| Kink RAG | `~/projects/obsidian-kink-rag/` | stephenchappo/obsidian-kink-rag (private) | Kink RAG knowledge base + processing pipeline |
-| Personal (encrypted) | `~/projects/obsidian-personal-enc/` (ciphertext) | stephenchappo/obsidian-personal-enc (private) | Personal info, accounts, daily notes, brand — gocryptfs encrypted |
+| Folder in Obsidian | Repo path | GitHub | Purpose |
+|---|---|---|---|
+| `(root)` | `~/projects/obsidian-vault/` | stephenchappo/obsidian-vault | General knowledge, homelab, projects, places |
+| `80-AI/` | `~/projects/obsidian-ai/` | stephenchappo/obsidian-ai (private) | Claude memory, benchmarks, AI reference |
+| `85-KinkRAG/` | `~/projects/obsidian-kink-rag/` | stephenchappo/obsidian-kink-rag (private) | Kink RAG knowledge base + processing pipeline |
+| `90-Encrypted/` | `~/projects/obsidian-personal-enc/` (gocryptfs) | stephenchappo/obsidian-personal-enc (private) | Personal info, daily notes, hobbies, brand |
 
-The personal vault plaintext mounts at `~/projects/obsidian-personal/` (local only, never in git).
-Mount it with: `~/bin/mount-personal-vault.sh` (passwordless — passfile at `~/.config/gocryptfs/personal-vault.pass`)
-Unmount with: `fusermount -u ~/projects/obsidian-personal`
-Auto-sync: cron runs `~/bin/sync-personal-vault.sh` every 5 minutes to commit + push ciphertext.
+**Personal vault:** plaintext mounts at `~/projects/obsidian-personal/`.
+Mount: `~/bin/mount-personal-vault.sh` (passwordless — passfile at `~/.config/gocryptfs/personal-vault.pass`)
+Unmount: `fusermount -u ~/projects/obsidian-personal`
+
+**Auto-sync (every 5 min via cron):**
+- `~/bin/sync-personal-vault.sh` → obsidian-personal-enc
+- `~/bin/sync-ai-vault.sh` → obsidian-ai
+- `~/bin/sync-kink-rag-vault.sh` → obsidian-kink-rag
+- obsidian-git plugin handles obsidian-vault (root)
 
 **The personal vault only exists on Anjie.** Daily notes, brand, personal info, and accounts live here and nowhere else. Other machines must not hold plaintext personal content.
+
+**Hobbies** live in `90-Encrypted/90-Hobbies/`. Main vault has no hobbies folder.
 
 ## Key References
 
