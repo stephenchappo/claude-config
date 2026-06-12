@@ -32,7 +32,7 @@ Repos to `git pull` at session start:
 | Docker configs | `/srv/docker/` |
 | Global env | `/srv/docker/.env` |
 | Knowledge graph | `~/projects/knowledge-graph/` → github.com/stephenchappo/knowledge-graph |
-| HA API | http://192.168.42.149:8123 |
+| HA API | http://192.168.42.142:8123 |
 | HA Tokens | see `~/.claude/secrets.md` (Trillian Claude + Prometheus) |
 | Marvin NAS | 192.168.42.186 — NFS mounted at `/marvin` |
 | Deepthought | 192.168.42.150 — Ollama AI inference |
