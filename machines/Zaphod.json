@@ -2,6 +2,6 @@
   "machine_name": "Zaphod",
   "subtitle": "Zaphod · Windows Workstation | Powered by Claude",
   "worklog_path": null,
-  "worklog_url": "http://192.168.1.100:3002/",
+  "worklog_url": "http://192.168.42.189:3002/",
   "vikunja_tasks_path": null
 }

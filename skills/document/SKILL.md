@@ -76,4 +76,4 @@ ssh trillian 'cd /srv/wiki-content && git pull'
 Confirm to the user with:
 - A success message: "Saved and pushed."
 - The direct URL that was just saved (as a clickable link)
-- Where to browse the full library: `http://192.168.1.100:3000/en/links` (wiki) or `/srv/wiki-content/links.md` on any machine after `git pull`
+- Where to browse the full library: `http://192.168.42.189:3000/en/links` (wiki) or `/srv/wiki-content/links.md` on any machine after `git pull`

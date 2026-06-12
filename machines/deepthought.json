@@ -1,7 +1,7 @@
 {
   "machine_name": "deepthought",
-  "subtitle": "deepthought · 192.168.1.151 | Marvin NAS · 192.168.1.101 | Powered by Claude",
+  "subtitle": "deepthought · 192.168.42.150 | Marvin NAS · 192.168.42.186 | Powered by Claude",
   "worklog_path": "/srv/wiki-content/worklog.md",
-  "worklog_url": "http://192.168.1.100:3000/worklog",
+  "worklog_url": "http://192.168.42.189:3000/worklog",
   "vikunja_tasks_path": "/srv/wiki-content/vikunja-tasks.json"
 }

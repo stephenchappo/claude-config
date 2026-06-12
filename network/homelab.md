@@ -10,8 +10,8 @@ Referenced by machine files at session start — keep updated when services chan
 
 | Item | Value |
 |------|-------|
-| Subnet | 192.168.1.0/24 |
-| Gateway | 192.168.1.1 (TP-Link router) |
+| Subnet | 192.168.42.0/24 |
+| Gateway | 192.168.42.1 (TP-Link router) |
 | External domain | fake-dom.com (Cloudflare) |
 | Cloudflare tunnel | Runs on Trillian — routes external traffic to LAN services |
 
@@ -19,53 +19,53 @@ Referenced by machine files at session start — keep updated when services chan
 
 ## Servers
 
-### Trillian — 192.168.1.100
+### Trillian — 192.168.42.189
 
 Primary homelab server. Runs all media, automation, and infrastructure Docker services.
 Docker configs: `/srv/docker/<service>/docker-compose.yml` — global env: `/srv/docker/.env`
 
 | Service | Internal URL | External URL | Notes |
 |---------|-------------|--------------|-------|
-| Wiki.js | http://192.168.1.100:3000 | http://wiki.fake-dom.com | GraphQL API at /graphql |
+| Wiki.js | http://192.168.42.189:3000 | http://wiki.fake-dom.com | GraphQL API at /graphql |
 | Jellyseerr | — | https://requests.fake-dom.com | Tunnel-only, Google OAuth required |
-| Plex | http://192.168.1.100:32400 | — | network_mode: host |
-| Prowlarr | http://192.168.1.100:9696 | — | Indexer/tracker hub for all arr apps |
-| Sonarr | http://192.168.1.100:8989 | — | TV management |
-| Radarr | http://192.168.1.100:7878 | — | Movie management |
-| Lidarr | http://192.168.1.100:8686 | — | Music management |
-| Whisparr | http://192.168.1.100:6969 | — | Adult video manager (v2 only) |
-| Readarr | http://192.168.1.100:8787 | — | Ebook / audiobook manager |
-| Stash | http://192.168.1.100:9999 | — | Adult content manager |
-| Booklore | http://192.168.1.100:6060 | — | Book library |
-| Portainer | http://192.168.1.100:9000 | — | Docker management UI |
-| Homepage | http://192.168.1.100:3001 | — | Service dashboard |
-| FlareSolverr | http://192.168.1.100:8191 | — | Cloudflare bypass (for Prowlarr) |
-| OpenVPN AS | http://192.168.1.100:943 | — | VPN server |
+| Plex | http://192.168.42.189:32400 | — | network_mode: host |
+| Prowlarr | http://192.168.42.189:9696 | — | Indexer/tracker hub for all arr apps |
+| Sonarr | http://192.168.42.189:8989 | — | TV management |
+| Radarr | http://192.168.42.189:7878 | — | Movie management |
+| Lidarr | http://192.168.42.189:8686 | — | Music management |
+| Whisparr | http://192.168.42.189:6969 | — | Adult video manager (v2 only) |
+| Readarr | http://192.168.42.189:8787 | — | Ebook / audiobook manager |
+| Stash | http://192.168.42.189:9999 | — | Adult content manager |
+| Booklore | http://192.168.42.189:6060 | — | Book library |
+| Portainer | http://192.168.42.189:9000 | — | Docker management UI |
+| Homepage | http://192.168.42.189:3001 | — | Service dashboard |
+| FlareSolverr | http://192.168.42.189:8191 | — | Cloudflare bypass (for Prowlarr) |
+| OpenVPN AS | http://192.168.42.189:943 | — | VPN server |
 
 Docker networks of note:
 - `tunnel-net` — cloudflared + Jellyseerr (no published ports)
 - `prowlarr_default` — Prowlarr + FlareSolverr + Readarr
 
-### Deepthought — 192.168.1.151
+### Deepthought — 192.168.42.150
 
 AI inference server (Dell G7 laptop, Ubuntu 22.04, RTX 4070 Laptop 8 GB VRAM).
 Also reachable as `deepthought` via mDNS / hosts file.
 
 | Service | URL | Notes |
 |---------|-----|-------|
-| Ollama | http://192.168.1.151:11434 | GPU-accelerated, systemd service |
-| Open WebUI | http://192.168.1.151:3000 | Docker, connects to Ollama |
-| ComfyUI | http://192.168.1.151:8188 | systemd service, CUDA |
-| Whisper ASR | http://192.168.1.151:9000 | Docker, OpenAI-compatible API, medium model |
-| Navidrome | http://192.168.1.151:4533 | Docker, music library |
-| n8n | http://192.168.1.151:5678 | Docker, automation platform, SQLite |
+| Ollama | http://192.168.42.150:11434 | GPU-accelerated, systemd service |
+| Open WebUI | http://192.168.42.150:3000 | Docker, connects to Ollama |
+| ComfyUI | http://192.168.42.150:8188 | systemd service, CUDA |
+| Whisper ASR | http://192.168.42.150:9000 | Docker, OpenAI-compatible API, medium model |
+| Navidrome | http://192.168.42.150:4533 | Docker, music library |
+| n8n | http://192.168.42.150:5678 | Docker, automation platform, SQLite |
 
 Ollama models (all uncensored): `dolphin-llama3` (8B), `dolphin-mistral` (7B),
 `llama2-uncensored` (7B), `wizard-vicuna-uncensored` (7B).
 
 ---
 
-## NAS — Marvin (192.168.1.101)
+## NAS — Marvin (192.168.42.186)
 
 Synology NAS. Mounted via NFS on Trillian and Deepthought at `/marvin/`.
 **Not mounted on Arthur.**
@@ -86,11 +86,10 @@ Synology NAS. Mounted via NFS on Trillian and Deepthought at `/marvin/`.
 
 | IP | Device | Notes |
 |----|--------|-------|
-| 192.168.1.1 | TP-Link Router | Gateway |
-| 192.168.1.100 | Trillian | Primary homelab server (wired) |
-| 192.168.1.101 | Marvin NAS | Synology |
-| 192.168.1.151 | Deepthought | AI inference server (WiFi) |
-| 192.168.1.171 | Marvin (Windows PC) | SMB/FTP |
+| 192.168.42.1 | TP-Link Router | Gateway |
+| 192.168.42.189 | Trillian | Primary homelab server (wired) |
+| 192.168.42.186 | Marvin NAS | Synology |
+| 192.168.42.150 | Deepthought | AI inference server (WiFi) |
 
 ### Smart Home / IoT
 
@@ -121,7 +120,7 @@ add public hostname in Cloudflare Zero Trust → Tunnels → <tunnel> → Public
 
 | Integration | Details |
 |-------------|---------|
-| Wiki GraphQL API | http://192.168.1.100:3000/graphql |
+| Wiki GraphQL API | http://192.168.42.189:3000/graphql |
 | Wiki API token | `WIKI_TOKEN` env var (in `~/.claude/settings.json` on each machine) |
 | Wiki worklog page | ID: 6, path: `worklog` |
 | Vikunja | Task source of truth |

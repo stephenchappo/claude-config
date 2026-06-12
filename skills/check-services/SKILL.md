@@ -15,35 +15,35 @@ curl -s -o /dev/null -w "%{http_code}" --max-time 5 <url>
 
 Run all probes. Endpoints grouped by host:
 
-**Trillian (192.168.1.100)**
+**Trillian (192.168.42.189)**
 
 | Service | URL |
 |---------|-----|
-| Wiki.js | http://192.168.1.100:3000 |
-| Plex | http://192.168.1.100:32400 |
-| Prowlarr | http://192.168.1.100:9696 |
-| Sonarr | http://192.168.1.100:8989 |
-| Radarr | http://192.168.1.100:7878 |
-| Lidarr | http://192.168.1.100:8686 |
-| Whisparr | http://192.168.1.100:6969 |
-| Readarr | http://192.168.1.100:8787 |
-| Stash | http://192.168.1.100:9999 |
-| Booklore | http://192.168.1.100:6060 |
-| Portainer | http://192.168.1.100:9000 |
-| Homepage | http://192.168.1.100:3001 |
-| FlareSolverr | http://192.168.1.100:8191 |
-| OpenVPN AS | http://192.168.1.100:943 |
+| Wiki.js | http://192.168.42.189:3000 |
+| Plex | http://192.168.42.189:32400 |
+| Prowlarr | http://192.168.42.189:9696 |
+| Sonarr | http://192.168.42.189:8989 |
+| Radarr | http://192.168.42.189:7878 |
+| Lidarr | http://192.168.42.189:8686 |
+| Whisparr | http://192.168.42.189:6969 |
+| Readarr | http://192.168.42.189:8787 |
+| Stash | http://192.168.42.189:9999 |
+| Booklore | http://192.168.42.189:6060 |
+| Portainer | http://192.168.42.189:9000 |
+| Homepage | http://192.168.42.189:3001 |
+| FlareSolverr | http://192.168.42.189:8191 |
+| OpenVPN AS | http://192.168.42.189:943 |
 
-**Deepthought (192.168.1.151)**
+**Deepthought (192.168.42.150)**
 
 | Service | URL |
 |---------|-----|
-| Ollama | http://192.168.1.151:11434 |
-| Open WebUI | http://192.168.1.151:3000 |
-| ComfyUI | http://192.168.1.151:8188 |
-| Whisper ASR | http://192.168.1.151:9000 |
-| Navidrome | http://192.168.1.151:4533 |
-| n8n | http://192.168.1.151:5678 |
+| Ollama | http://192.168.42.150:11434 |
+| Open WebUI | http://192.168.42.150:3000 |
+| ComfyUI | http://192.168.42.150:8188 |
+| Whisper ASR | http://192.168.42.150:9000 |
+| Navidrome | http://192.168.42.150:4533 |
+| n8n | http://192.168.42.150:5678 |
 
 ## Step 2 — Interpret results
 
@@ -80,12 +80,12 @@ the container status and suggest a restart command?"*
 
 If confirmed, run:
 ```bash
-ssh scon@192.168.1.100 "docker ps --format 'table {{.Names}}\t{{.Status}}' | grep -i <service>"
+ssh scon@192.168.42.189 "docker ps --format 'table {{.Names}}\t{{.Status}}' | grep -i <service>"
 ```
 
 If the container is stopped or restarting, suggest:
 ```bash
-ssh scon@192.168.1.100 "cd /srv/docker/<service> && docker compose up -d"
+ssh scon@192.168.42.189 "cd /srv/docker/<service> && docker compose up -d"
 ```
 
 Present the command for the user to approve — do not run it automatically.
@@ -93,8 +93,8 @@ Present the command for the user to approve — do not run it automatically.
 For Deepthought services (Ollama, ComfyUI — systemd; others — Docker):
 ```bash
 # Docker services
-ssh scon@192.168.1.151 "docker ps --format 'table {{.Names}}\t{{.Status}}'"
+ssh scon@192.168.42.150 "docker ps --format 'table {{.Names}}\t{{.Status}}'"
 
 # Systemd services (Ollama, ComfyUI)
-ssh scon@192.168.1.151 "systemctl status ollama comfyui"
+ssh scon@192.168.42.150 "systemctl status ollama comfyui"
 ```

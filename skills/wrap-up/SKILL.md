@@ -60,7 +60,7 @@ config values are present — skip steps whose config keys are absent or marked 
 
 4a. **Update the Plans Registry** *(skip if `Wiki API` not configured)* —
     Check `~/.claude/plans/` for any plans created or updated this session. For each:
-    - If **new**: add a row to the Plans Registry (http://192.168.1.100:3000/en/claude/plans, page ID 29) with status ⏳ Pending.
+    - If **new**: add a row to the Plans Registry (http://192.168.42.189:3000/en/claude/plans, page ID 29) with status ⏳ Pending.
     - If **approved/executed this session**: update the row's status to ✅ Completed or 🔄 In Progress as appropriate.
     Update the page via the Wiki.js GraphQL API using the `WIKI_TOKEN` env var.
 

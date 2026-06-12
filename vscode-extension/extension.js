@@ -20,13 +20,13 @@ const TASKS_PATH = expandTilde(MACHINE.vikunja_tasks_path) || '/srv/wiki-content
 
 const SERVICES = [
   { name: 'Jellyseerr',  url: 'https://requests.fake-dom.com', desc: 'Media requests' },
-  { name: 'Radarr',      url: 'http://192.168.1.100:7878',     desc: 'Movies' },
-  { name: 'Sonarr',      url: 'http://192.168.1.100:8989',     desc: 'TV' },
-  { name: 'Lidarr',      url: 'http://192.168.1.100:8686',     desc: 'Music' },
-  { name: 'Prowlarr',    url: 'http://192.168.1.100:9696',     desc: 'Indexers' },
-  { name: 'Stash',       url: 'http://192.168.1.100:9998',     desc: 'Adult media' },
-  { name: 'Booklore',    url: 'http://192.168.1.100:6060',     desc: 'Books' },
-  { name: 'Wiki',        url: 'http://192.168.1.100:3000',     desc: 'Documentation' },
+  { name: 'Radarr',      url: 'http://192.168.42.189:7878',     desc: 'Movies' },
+  { name: 'Sonarr',      url: 'http://192.168.42.189:8989',     desc: 'TV' },
+  { name: 'Lidarr',      url: 'http://192.168.42.189:8686',     desc: 'Music' },
+  { name: 'Prowlarr',    url: 'http://192.168.42.189:9696',     desc: 'Indexers' },
+  { name: 'Stash',       url: 'http://192.168.42.189:9998',     desc: 'Adult media' },
+  { name: 'Booklore',    url: 'http://192.168.42.189:6060',     desc: 'Books' },
+  { name: 'Wiki',        url: 'http://192.168.42.189:3000',     desc: 'Documentation' },
 ];
 
 

@@ -6,7 +6,7 @@
        1. Watch/button tap triggers the task (via AutoWear)
        2. Flashes "Listening..." on screen
        3. Records 5 seconds of audio via phone mic
-       4. POSTs audio to n8n on deepthought (192.168.1.128:5678)
+       4. POSTs audio to n8n on deepthought (192.168.42.150:5678)
        5. Whisper transcribes → Ollama responds → JSON returned
        6. Speaks the response via Android TTS
 
@@ -82,7 +82,7 @@
       <code>664</code>
       <Str sr="arg0" ve="3">// POST audio to deepthought n8n, get text response
 var audioPath = "/sdcard/hl_voice.m4a";
-var url = "http://192.168.1.128:5678/webhook/voice-text";
+var url = "http://192.168.42.150:5678/webhook/voice-text";
 var boundary = "Boundary" + Date.now();
 var resp = "Error: could not reach deepthought";
 try {
